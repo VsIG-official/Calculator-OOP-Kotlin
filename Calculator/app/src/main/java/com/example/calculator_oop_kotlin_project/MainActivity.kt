@@ -1,8 +1,10 @@
 package com.example.calculator_oop_kotlin_project
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity()
 {
@@ -45,9 +47,36 @@ class MainActivity : AppCompatActivity()
             }
             tvResult.text=""
         }
+
+        tvEquals.setOnClickListener {
+            try
+            {
+                val expression = ExpressionBuilder(tvExpression.text.toString()).build()
+                val result = expression.evaluate()
+                val longResult = result.toLong()
+                if (result == longResult.toDouble())
+                {
+                    tvResult.text = longResult.toString()
+                }
+                else
+                {
+                    tvResult.text=result.toString()
+                }
+            }
+            catch (e:Exception)
+            {
+                Log.d("Exception","message : " + e.message)
+            }
+
+        }
     }
 
     fun appendExpression(string: String, canClear: Boolean){
+
+        if (tvResult.text.isNotEmpty())
+        {
+            tvExpression.text=""
+        }
         if (canClear)
         {
             tvResult.text = ""
