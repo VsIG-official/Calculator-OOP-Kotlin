@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
             tvExpression.append(tvResult.text)
             tvExpression.append(string)
             tvResult.text=""
-
         }
     }
 }
