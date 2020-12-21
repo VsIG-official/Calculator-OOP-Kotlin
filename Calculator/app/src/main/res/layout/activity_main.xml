@@ -7,15 +7,16 @@
     android:background="@android:color/background_dark"
     android:orientation="vertical"
     >
+
     <TextView
         android:id="@+id/tvExpression"
-        android:layout_width="match_parent"
+        android:layout_width="100sp"
         android:layout_height="80sp"
-        android:textColor="@color/numberButton"
-        android:gravity="end"
         android:ellipsize="start"
-        android:textSize="40sp"
-        android:singleLine="true" />
+        android:gravity="end"
+        android:singleLine="true"
+        android:textColor="@color/numberButton"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tvResult"
@@ -45,12 +46,12 @@
             <TextView
                 android:id="@+id/tvOpenPar"
                 style="@style/ActionButtonStyle"
-                android:text="("/>
+                android:text="±"/>
 
             <TextView
                 android:id="@+id/tvClosePar"
                 style="@style/ActionButtonStyle"
-                android:text=")"/>
+                android:text="1/x"/>
 
             <TextView
                 android:id="@+id/tvDivide"
