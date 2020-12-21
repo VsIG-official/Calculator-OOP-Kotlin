@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener {  }
+        plus_minus_btn.setOnClickListener { }
         one_divide_x_btn.setOnClickListener {  }
         divide_btn.setOnClickListener {  }
         multiply_btn.setOnClickListener {  }
         minus_btn.setOnClickListener {  }
         plus_minus_btn.setOnClickListener {  }
-        equals_btn.setOnClickListener {  }
+        equals_btn.setOnClickListener { finishSecondNumber() }
         back_btn.setOnClickListener { clearLastCharacter() }
 
         nine_btn.setOnClickListener { appendText("9") }
@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity()
         {
             second_numbers.text = tempString.substring(0, tempString.length-1)
         }
-        //second_numbers
     }
 
     private fun finishSecondNumber()
