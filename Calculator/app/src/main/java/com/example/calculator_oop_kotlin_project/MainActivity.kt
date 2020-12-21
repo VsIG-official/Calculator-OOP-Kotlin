@@ -53,11 +53,17 @@ class MainActivity : AppCompatActivity()
 
     private fun clearLastCharacter()
     {
-        second_numbers.text.dropLast(1)
+        val tempString = second_numbers.text.toString()
+        if (tempString.isNotEmpty())
+        {
+            second_numbers.text = tempString.substring(0, tempString.length-1)
+        }
+        //second_numbers
     }
 
-    private fun finishFirstNumber()
+    private fun finishSecondNumber()
     {
-
+        first_numbers.text = second_numbers.text
+        second_numbers.text=""
     }
 }
