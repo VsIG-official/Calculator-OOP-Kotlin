@@ -10,28 +10,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80sp">
+        android:layout_height="70sp">
+
         <ImageView
             android:id="@+id/options_btn"
+            style="@style/NumberButtonStyle"
             android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_height="match_parent"
             android:ellipsize="start"
             android:gravity="end"
-            android:singleLine="true"
-            android:textColor="@color/numberButton"
-            android:src="@drawable/baseline_settings_white_18dp"
             android:scaleType="center"
-            style="@style/NumberButtonStyle"
-            />
+            android:singleLine="true"
+            android:src="@drawable/baseline_settings_white_18dp"
+            android:textColor="@color/numberButton" />
 
         <TextView
             android:id="@+id/first_numbers"
             android:layout_width="330sp"
-            android:layout_height="80sp"
-            android:ellipsize="start"
+            android:layout_height="70sp"
+            android:ellipsize="end"
             android:gravity="end"
             android:singleLine="true"
-            android:textColor="@color/numberButton"
+            android:textColor="@color/gray"
             android:textSize="40sp" />
     </LinearLayout>
 
@@ -39,10 +39,10 @@
         android:id="@+id/second_numbers"
         android:layout_width="match_parent"
         android:layout_height="100sp"
-        android:textColor="@color/numberButton"
+        android:textColor="@color/white"
         android:gravity="end"
-        android:textSize="30sp"
-        android:ellipsize="end"
+        android:textSize="50sp"
+        android:ellipsize="start"
         android:singleLine="true" />
     <LinearLayout
         android:layout_width="match_parent"
