@@ -25,7 +25,7 @@
             />
 
         <TextView
-            android:id="@+id/first_numbers_btn"
+            android:id="@+id/first_numbers"
             android:layout_width="330sp"
             android:layout_height="80sp"
             android:ellipsize="start"
@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/second_numbers_btn"
+        android:id="@+id/second_numbers"
         android:layout_width="match_parent"
         android:layout_height="100sp"
         android:textColor="@color/numberButton"
@@ -195,11 +195,13 @@
                 android:text="0"
                 android:textSize="30sp"/>
 
-            <TextView
+            <ImageView
                 android:id="@+id/back_btn"
                 style="@style/NumberButtonStyle"
                 android:text="Back"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:src="@drawable/baseline_backspace_white_18dp"
+                android:scaleType="center"/>
 
             <TextView
                 android:id="@+id/equals_btn"
