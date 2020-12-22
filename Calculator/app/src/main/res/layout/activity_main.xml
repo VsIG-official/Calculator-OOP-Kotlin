@@ -32,7 +32,9 @@
             android:gravity="end"
             android:singleLine="true"
             android:textColor="@color/gray"
-            android:textSize="40sp" />
+            android:textSize="40sp"
+            android:scrollbars="vertical"
+            />
     </LinearLayout>
 
     <TextView
@@ -43,7 +45,9 @@
         android:gravity="end"
         android:textSize="50sp"
         android:ellipsize="start"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:scrollbars="vertical"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -7,6 +7,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
 {
+    var operation: Char = ' '
+    var firstNumberToOperate: Double = 0.0
+    var secondNumberToOperate: Double = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -23,8 +27,8 @@ class MainActivity : AppCompatActivity()
         divide_btn.setOnClickListener {  }
         multiply_btn.setOnClickListener {  }
         minus_btn.setOnClickListener {  }
-        plus_minus_btn.setOnClickListener {  }
-        equals_btn.setOnClickListener { finishSecondNumber() }
+        plus_btn.setOnClickListener { plusFunction() }
+        equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
 
         nine_btn.setOnClickListener { appendText("9") }
@@ -65,4 +69,26 @@ class MainActivity : AppCompatActivity()
         first_numbers.text = second_numbers.text
         second_numbers.text=""
     }
+
+    private fun plusFunction()
+    {
+        finishSecondNumber()
+        operation = '+'
+    }
+
+    private fun equalsFunction()
+    {
+        val tempValue1 = first_numbers.text.toString()
+        val tempValue2 = second_numbers.text.toString()
+
+        var result: Double = 0.0
+        if (operation == '+')
+        {
+            result = tempValue1.toDouble()+tempValue2.toDouble()
+        }
+
+        first_numbers.text=result.toString()
+        second_numbers.text=""
+    }
+
 }
