@@ -88,7 +88,11 @@ class MainActivity : AppCompatActivity()
 
     private fun equalsFunction()
     {
-
+        if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty()) {
+            // DO NOTHING
+        }
+        else if (!second_numbers.text.isNullOrEmpty())
+        {
             val tempValue1 = first_numbers.text.toString()
             val tempValue2 = second_numbers.text.toString()
 
@@ -101,6 +105,6 @@ class MainActivity : AppCompatActivity()
 
             first_numbers.text = result.toString()
             second_numbers.text = ""
+        }
     }
-
 }
