@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity()
         one_divide_x_btn.setOnClickListener {  }
         divide_btn.setOnClickListener {  }
         multiply_btn.setOnClickListener {  }
-        minus_btn.setOnClickListener {  }
+        minus_btn.setOnClickListener { minusFunction() }
         plus_btn.setOnClickListener { plusFunction() }
         equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
@@ -66,8 +66,12 @@ class MainActivity : AppCompatActivity()
 
     private fun finishSecondNumber()
     {
-        first_numbers.text = second_numbers.text
-        second_numbers.text=""
+        if (!second_numbers.text.isNullOrEmpty())
+        {
+            first_numbers.text = second_numbers.text
+            first_numbers.append(".0")
+            second_numbers.text = ""
+        }
     }
 
     private fun plusFunction()
@@ -76,19 +80,27 @@ class MainActivity : AppCompatActivity()
         operation = '+'
     }
 
+    private fun minusFunction()
+    {
+        finishSecondNumber()
+        operation = '-'
+    }
+
     private fun equalsFunction()
     {
-        val tempValue1 = first_numbers.text.toString()
-        val tempValue2 = second_numbers.text.toString()
 
-        var result: Double = 0.0
-        if (operation == '+')
-        {
-            result = tempValue1.toDouble()+tempValue2.toDouble()
-        }
+            val tempValue1 = first_numbers.text.toString()
+            val tempValue2 = second_numbers.text.toString()
 
-        first_numbers.text=result.toString()
-        second_numbers.text=""
+            var result: Double = 0.0
+            if (operation == '+') {
+                result = tempValue1.toDouble() + tempValue2.toDouble()
+            } else if (operation == '-') {
+                result = tempValue1.toDouble() - tempValue2.toDouble()
+            }
+
+            first_numbers.text = result.toString()
+            second_numbers.text = ""
     }
 
 }
