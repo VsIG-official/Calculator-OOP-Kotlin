@@ -78,17 +78,20 @@ class MainActivity : AppCompatActivity()
     {
         finishSecondNumber()
         operation = '+'
+        procedure.text=operation.toString()
     }
 
     private fun minusFunction()
     {
         finishSecondNumber()
         operation = '-'
+        procedure.text=operation.toString()
     }
 
     private fun equalsFunction()
     {
-        if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty()) {
+        if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+        {
             // DO NOTHING
         }
         else if (!second_numbers.text.isNullOrEmpty())
