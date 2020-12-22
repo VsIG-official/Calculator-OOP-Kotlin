@@ -35,19 +35,36 @@
             android:textSize="40sp"
             android:scrollbars="vertical"
             />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/second_numbers"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:textColor="@color/white"
-        android:gravity="end"
-        android:textSize="50sp"
-        android:ellipsize="start"
-        android:singleLine="true"
-        android:scrollbars="vertical"
-        />
+        android:layout_height="100sp">
+
+        <TextView
+            android:id="@+id/procedure"
+            android:layout_width="59dp"
+            android:layout_height="match_parent"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/gray"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/second_numbers"
+            android:layout_width="324dp"
+            android:layout_height="match_parent"
+            android:ellipsize="start"
+            android:gravity="end"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+    </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
