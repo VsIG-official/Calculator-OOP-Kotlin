@@ -3,6 +3,7 @@ package com.example.calculator_oop_kotlin_project
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity()
     private fun appendText(number: String)
     {
         second_numbers.append(number);
+        second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
     }
 
     private fun clearAllText()
