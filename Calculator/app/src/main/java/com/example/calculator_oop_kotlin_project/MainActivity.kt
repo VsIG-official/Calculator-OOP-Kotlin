@@ -2,7 +2,6 @@
 package com.example.calculator_oop_kotlin_project
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity()
     private fun appendText(number: String)
     {
         second_numbers.append(number);
-        second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+        second_scroll.post { second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT) }
     }
 
     private fun clearAllText()
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity()
         val tempString = second_numbers.text.toString()
         if (tempString.isNotEmpty())
         {
-            second_numbers.text = tempString.substring(0, tempString.length-1)
+            second_numbers.text = tempString.substring(0, tempString.length - 1)
         }
     }
 
