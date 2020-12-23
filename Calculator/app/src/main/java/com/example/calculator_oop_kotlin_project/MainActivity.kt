@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity()
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { }
         one_divide_x_btn.setOnClickListener {  }
-        divide_btn.setOnClickListener {  }
+        divide_btn.setOnClickListener { divideFunction() }
         multiply_btn.setOnClickListener {  }
         minus_btn.setOnClickListener { minusFunction() }
         plus_btn.setOnClickListener { plusFunction() }
@@ -94,6 +94,13 @@ class MainActivity : AppCompatActivity()
         procedure.text=operation.toString()
     }
 
+    private fun divideFunction()
+    {
+        operation = '/'
+        finishSecondNumber()
+        procedure.text=operation.toString()
+    }
+
     private fun equalsFunction()
     {
         if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
@@ -110,6 +117,9 @@ class MainActivity : AppCompatActivity()
                 result = tempValue1.toDouble() + tempValue2.toDouble()
             } else if (operation == '-') {
                 result = tempValue1.toDouble() - tempValue2.toDouble()
+            } else if (operation == '/')
+            {
+                result = tempValue1.toDouble() / tempValue2.toDouble()
             }
 
             first_numbers.text = result.toString()
