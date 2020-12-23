@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity()
     {
         first_numbers.text=""
         second_numbers.text=""
+        operation=' '
+        procedure.text=""
     }
 
     private fun clearLastCharacter()
@@ -66,7 +68,11 @@ class MainActivity : AppCompatActivity()
 
     private fun finishSecondNumber()
     {
-        if (!second_numbers.text.isNullOrEmpty())
+        if  (!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+        {
+            equalsFunction()
+        }
+        else if (!second_numbers.text.isNullOrEmpty())
         {
             first_numbers.text = second_numbers.text
             first_numbers.append(".0")
@@ -76,15 +82,15 @@ class MainActivity : AppCompatActivity()
 
     private fun plusFunction()
     {
-        finishSecondNumber()
         operation = '+'
+        finishSecondNumber()
         procedure.text=operation.toString()
     }
 
     private fun minusFunction()
     {
-        finishSecondNumber()
         operation = '-'
+        finishSecondNumber()
         procedure.text=operation.toString()
     }
 
