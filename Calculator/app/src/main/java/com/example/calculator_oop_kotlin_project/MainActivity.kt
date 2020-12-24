@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { }
+        plus_minus_btn.setOnClickListener { plusMinusFunction() }
         one_divide_x_btn.setOnClickListener {  }
         divide_btn.setOnClickListener { divideFunction() }
         multiply_btn.setOnClickListener { multiplyFunction() }
@@ -110,6 +110,14 @@ class MainActivity : AppCompatActivity()
         procedure.text=operation.toString()
     }
 
+    private fun plusMinusFunction()
+    {
+        var tempOperation = operation
+        operation = '±'
+        changeOneNumber()
+        operation = tempOperation
+    }
+
     private fun equalsFunction()
     {
         if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
@@ -137,6 +145,22 @@ class MainActivity : AppCompatActivity()
 
             first_numbers.text = result.toString()
             second_numbers.text = ""
+        }
+    }
+
+    private fun changeOneNumber()
+    {
+        if(!first_numbers.text.isNullOrEmpty())
+        {
+            val tempValue1 = first_numbers.text.toString()
+            //val tempValue2 = second_numbers.text.toString()
+
+            var result: Double = 0.0
+            if (operation == '±')
+            {
+                result = tempValue1.toDouble() * -1
+            }
+            first_numbers.text = result.toString()
         }
     }
 }
