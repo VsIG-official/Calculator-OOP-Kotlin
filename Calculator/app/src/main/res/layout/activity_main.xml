@@ -74,9 +74,8 @@
 
         <HorizontalScrollView
             android:id="@+id/second_scroll"
-            android:layout_width="330sp"
+            android:layout_width="330dp"
             android:layout_height="fill_parent"
-            android:layout_marginRight="10dp"
             android:scrollbars="horizontal"
             >
 
@@ -85,23 +84,17 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_gravity="right"
-            android:gravity="end"
-            android:ellipsize="end"
-            android:textAlignment="textEnd"
             >
 
         <TextView
             android:id="@+id/second_numbers"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="end"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="50sp"
             android:scrollbars="horizontal"
             android:scrollHorizontally="true"
-            android:layout_gravity="right"
-            android:textAlignment="textEnd"
             />
 
             </LinearLayout>
