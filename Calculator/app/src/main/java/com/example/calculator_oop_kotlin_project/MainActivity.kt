@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity()
         plus_minus_btn.setOnClickListener { }
         one_divide_x_btn.setOnClickListener {  }
         divide_btn.setOnClickListener { divideFunction() }
-        multiply_btn.setOnClickListener {  }
+        multiply_btn.setOnClickListener { multiplyFunction() }
         minus_btn.setOnClickListener { minusFunction() }
         plus_btn.setOnClickListener { plusFunction() }
         equals_btn.setOnClickListener { equalsFunction() }
@@ -103,6 +103,13 @@ class MainActivity : AppCompatActivity()
         procedure.text=operation.toString()
     }
 
+    private fun multiplyFunction()
+    {
+        operation = '*'
+        finishSecondNumber()
+        procedure.text=operation.toString()
+    }
+
     private fun equalsFunction()
     {
         if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
@@ -122,6 +129,10 @@ class MainActivity : AppCompatActivity()
             } else if (operation == '/')
             {
                 result = tempValue1.toDouble() / tempValue2.toDouble()
+            }
+            else if (operation == '*')
+            {
+                result = tempValue1.toDouble() * tempValue2.toDouble()
             }
 
             first_numbers.text = result.toString()
