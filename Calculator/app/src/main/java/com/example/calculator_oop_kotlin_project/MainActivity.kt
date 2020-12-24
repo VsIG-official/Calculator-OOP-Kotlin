@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity()
         plus_btn.setOnClickListener { plusFunction() }
         equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
+        mod_btn.setOnClickListener { modFunction() }
 
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
@@ -111,6 +112,13 @@ class MainActivity : AppCompatActivity()
         procedure.text=operation.toString()
     }
 
+    private fun modFunction()
+    {
+        operation = '%'
+        changeOneNumber()
+        procedure.text=operation.toString()
+    }
+
     private fun plusMinusFunction()
     {
         var tempOperation = operation
@@ -178,6 +186,17 @@ class MainActivity : AppCompatActivity()
                 else
                 {
                     result = 1 / tempValue1.toDouble()
+                }
+            }
+            else if (operation == '%')
+            {
+                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = tempValue2.toDouble()
+                }
+                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = tempValue1.toDouble() % tempValue1.toDouble()
                 }
             }
             first_numbers.text = result.toString()
