@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity()
         equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
         mod_btn.setOnClickListener { modFunction() }
+        degree_btn.setOnClickListener { degreeFunction() }
 
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
@@ -119,6 +120,13 @@ class MainActivity : AppCompatActivity()
         procedure.text=operation.toString()
     }
 
+    private fun degreeFunction()
+    {
+        operation = '^'
+        changeOneNumber()
+        procedure.text=operation.toString()
+    }
+
     private fun plusMinusFunction()
     {
         var tempOperation = operation
@@ -159,7 +167,19 @@ class MainActivity : AppCompatActivity()
             {
                 result = tempValue1.toDouble() * tempValue2.toDouble()
             }
-
+            else if (operation == '^')
+            {
+                if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+            {
+                var tempValue3: Double = 0.0
+                tempValue3=first_numbers.text.toString().toDouble()
+                for (i in tempValue2)
+                {
+                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                }
+                result = tempValue3
+            }
+            }
             first_numbers.text = result.toString()
             second_numbers.text = ""
         }
@@ -196,7 +216,24 @@ class MainActivity : AppCompatActivity()
                 }
                 else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
                 {
-                    result = tempValue1.toDouble() % tempValue1.toDouble()
+                    result = tempValue1.toDouble() % tempValue2.toDouble()
+                }
+            }
+            else if (operation == '^')
+            {
+                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = tempValue2.toDouble()
+                }
+                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+                {
+                    var tempValue3: Double = 0.0
+                    tempValue3=first_numbers.text.toString().toDouble()
+                    for (i in tempValue2)
+                    {
+                        tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                    }
+                    result = tempValue3
                 }
             }
             first_numbers.text = result.toString()
