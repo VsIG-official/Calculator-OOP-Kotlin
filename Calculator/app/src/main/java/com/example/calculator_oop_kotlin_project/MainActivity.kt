@@ -182,7 +182,12 @@ class MainActivity : AppCompatActivity()
             }
             else if (operation == '%')
             {
-                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
+                {
+                    // DO NOTHING
+                    result = tempValue1.toDouble()
+                }
+                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
                 {
                     result = tempValue2.toDouble()
                 }
@@ -193,7 +198,12 @@ class MainActivity : AppCompatActivity()
             }
             else if (operation == '^')
             {
-                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
+                {
+                    // DO NOTHING
+                    result = tempValue1.toDouble()
+                }
+                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
                 {
                     result = tempValue2.toDouble()
                 }
@@ -238,7 +248,12 @@ class MainActivity : AppCompatActivity()
             }
             else if (operation == '%')
             {
-                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
+                {
+                    // DO NOTHING
+                    result = tempValue1.toDouble()
+                }
+                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
                 {
                     result = tempValue2.toDouble()
                 }
@@ -249,7 +264,12 @@ class MainActivity : AppCompatActivity()
             }
             else if (operation == '^')
             {
-                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
+                {
+                    // DO NOTHING
+                    result = tempValue1.toDouble()
+                }
+                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
                 {
                     result = tempValue2.toDouble()
                 }
