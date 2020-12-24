@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setOnClickListeners()
+        first_numbers.text=firstNumberToOperate.toString()
     }
 
     private fun setOnClickListeners()
