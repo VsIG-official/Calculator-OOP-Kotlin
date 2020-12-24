@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setOnClickListeners()
-        first_numbers.text=firstNumberToOperate.toString()
+        first_numbers.text="0.0"
     }
 
     private fun setOnClickListeners()
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity()
 
     private fun clearAllText()
     {
-        first_numbers.text=""
+        first_numbers.text="0.0"
         second_numbers.text=""
         operation=' '
         procedure.text=""
@@ -162,6 +162,7 @@ class MainActivity : AppCompatActivity()
         if(!first_numbers.text.isNullOrEmpty())
         {
             val tempValue1 = first_numbers.text.toString()
+            val tempValue2 = second_numbers.text.toString()
 
             var result: Double = 0.0
             if (operation == '±')
@@ -170,9 +171,17 @@ class MainActivity : AppCompatActivity()
             }
             else if (operation == 'R')
             {
-                result = 1 / tempValue1.toDouble()
+                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = 1 / tempValue2.toDouble()
+                }
+                else
+                {
+                    result = 1 / tempValue1.toDouble()
+                }
             }
             first_numbers.text = result.toString()
+            second_numbers.text = ""
         }
     }
 }
