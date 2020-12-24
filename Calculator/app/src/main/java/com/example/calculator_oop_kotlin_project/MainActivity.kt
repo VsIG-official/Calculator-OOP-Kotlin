@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity()
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { plusMinusFunction() }
-        one_divide_x_btn.setOnClickListener {  }
+        one_divide_x_btn.setOnClickListener { reciprocalFunction() }
         divide_btn.setOnClickListener { divideFunction() }
         multiply_btn.setOnClickListener { multiplyFunction() }
         minus_btn.setOnClickListener { minusFunction() }
@@ -118,6 +118,14 @@ class MainActivity : AppCompatActivity()
         operation = tempOperation
     }
 
+    private fun reciprocalFunction()
+    {
+        var tempOperation = operation
+        operation = 'R'
+        changeOneNumber()
+        operation = tempOperation
+    }
+
     private fun equalsFunction()
     {
         if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
@@ -153,12 +161,15 @@ class MainActivity : AppCompatActivity()
         if(!first_numbers.text.isNullOrEmpty())
         {
             val tempValue1 = first_numbers.text.toString()
-            //val tempValue2 = second_numbers.text.toString()
 
             var result: Double = 0.0
             if (operation == '±')
             {
                 result = tempValue1.toDouble() * -1
+            }
+            else if (operation == 'R')
+            {
+                result = 1 / tempValue1.toDouble()
             }
             first_numbers.text = result.toString()
         }
