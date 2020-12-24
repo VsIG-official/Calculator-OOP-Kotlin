@@ -170,15 +170,43 @@ class MainActivity : AppCompatActivity()
             else if (operation == '^')
             {
                 if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-            {
-                var tempValue3: Double = 0.0
-                tempValue3=first_numbers.text.toString().toDouble()
-                for (i in tempValue2)
                 {
-                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                    var tempValue3: Double = 0.0
+                    tempValue3=first_numbers.text.toString().toDouble()
+                    for (i in tempValue2)
+                    {
+                        tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                    }
+                    result = tempValue3
                 }
-                result = tempValue3
             }
+            else if (operation == '%')
+            {
+                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = tempValue2.toDouble()
+                }
+                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = tempValue1.toDouble() % tempValue2.toDouble()
+                }
+            }
+            else if (operation == '^')
+            {
+                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
+                {
+                    result = tempValue2.toDouble()
+                }
+                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+                {
+                    var tempValue3: Double = 0.0
+                    tempValue3=first_numbers.text.toString().toDouble()
+                    for (i in tempValue2)
+                    {
+                        tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                    }
+                    result = tempValue3
+                }
             }
             first_numbers.text = result.toString()
             second_numbers.text = ""
