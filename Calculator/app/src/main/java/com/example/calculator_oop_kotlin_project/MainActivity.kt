@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firstNumber.text="0.0"
-        MathClass = MathOperations(firstNumber, secondNumber,procedure ,operation)
+        MathClass = MathOperations()
         setOnClickListeners()
     }
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity()
         divide_btn.setOnClickListener { divideFunction() }
         multiply_btn.setOnClickListener { multiplyFunction() }
         minus_btn.setOnClickListener { minusFunction() }
-        plus_btn.setOnClickListener { MathClass.Calculate('+') }
+        plus_btn.setOnClickListener { Calculate('+') }
         equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
         mod_btn.setOnClickListener { modFunction() }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity()
     {
         if  (!firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty())
         {
-            MathClass.Equals()
+            Calculate()
         }
         else if (!secondNumber.text.isNullOrEmpty())
         {
@@ -100,36 +100,36 @@ class MainActivity : AppCompatActivity()
                 when (operation) {
 
                     '+' -> {
-                        result = Add(tempValue1.toDouble(), tempValue2.toDouble())
-                        //result = tempValue1.toDouble() + tempValue2.toDouble()
+                        //finishSecondNumber()
+                        result = MathClass.Add(tempValue1.toDouble(), tempValue2.toDouble())
                     }
 
                     '-' -> {
-                        result = tempValue1.toDouble() - tempValue2.toDouble()
+                        //finishSecondNumber()
+                        result = MathClass.Substract(tempValue1.toDouble(), tempValue2.toDouble())
                     }
 
                     '/' -> {
-                        result = tempValue1.toDouble() / tempValue2.toDouble()
+                        //finishSecondNumber()
+                        result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
                     }
 
                     '*' -> {
-                        result = tempValue1.toDouble() * tempValue2.toDouble()
+                        //finishSecondNumber()
+                        result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
                     }
 
                     '^' -> {
+                        ChangeOneNumber()
                         when {
                             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                var tempValue3: Double = 0.0
-                                tempValue3=firstNumber.text.toString().toDouble()
-                                for (i in tempValue2) {
-                                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
-                                }
-                                result = tempValue3
+                                result = MathClass.Degree(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
                     }
 
                     '%' -> {
+                        ChangeOneNumber()
                         when {
                             !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
                                 // DO NOTHING
@@ -145,6 +145,7 @@ class MainActivity : AppCompatActivity()
                     }
 
                     '^' -> {
+                        ChangeOneNumber()
                         when {
                             !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
                                 // DO NOTHING
@@ -168,6 +169,7 @@ class MainActivity : AppCompatActivity()
                 // do this after calling calculate
                 firstNumber.text = result.toString()
                 secondNumber.text = ""
+                procedure.text=operation.toString()
 
                 return result
             }

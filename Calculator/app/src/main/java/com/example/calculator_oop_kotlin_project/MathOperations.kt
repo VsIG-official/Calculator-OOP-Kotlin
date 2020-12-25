@@ -1,44 +1,27 @@
 package com.example.calculator_oop_kotlin_project
 
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-import org.w3c.dom.Text
 
-class MathOperations(firstTextView: TextView, secondTextView: TextView, procedureTextView: TextView, operationChar: Char) {
-
-    private var firstNumber = firstTextView
-    private var secondNumber = secondTextView
-    private var procedure = procedureTextView
-    private var operation = operationChar
+class MathOperations() {
 
     fun Add(firstNumber: Double, secondNumber: Double): Double
     {
-        operation = '+'
-        finishSecondNumber()
-        procedure.text=operation.toString()
-
-        return firstNumber.toDouble() + secondNumber.toDouble()
+        return firstNumber + secondNumber
     }
 
-    fun Substract()
+    fun Substract(firstNumber: Double, secondNumber: Double): Double
     {
-        operation = '-'
-        finishSecondNumber()
-        procedure.text=operation.toString()
+        return firstNumber - secondNumber
     }
 
-    fun Divide()
+    fun Divide(firstNumber: Double, secondNumber: Double): Double
     {
-        operation = '/'
-        finishSecondNumber()
-        procedure.text=operation.toString()
+        return firstNumber / secondNumber
     }
 
-    fun Multiply()
+    fun Multiply(firstNumber: Double, secondNumber: Double): Double
     {
-        operation = '*'
-        finishSecondNumber()
-        procedure.text=operation.toString()
+        return firstNumber * secondNumber
     }
 
     fun Mod()
@@ -48,11 +31,14 @@ class MathOperations(firstTextView: TextView, secondTextView: TextView, procedur
         procedure.text=operation.toString()
     }
 
-    fun Degree()
+    fun Degree(firstNumber: Double, secondNumber: Double): Double
     {
-        operation = '^'
-        changeOneNumber()
-        procedure.text=operation.toString()
+        var tempValue: Double = 0.0
+        tempValue=firstNumber
+        for (i in secondNumber.toString()) {
+            tempValue = firstNumber * secondNumber
+        }
+        return tempValue
     }
 
     fun PlusMinus()
