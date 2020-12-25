@@ -1,6 +1,7 @@
 package com.example.calculator_oop_kotlin_project
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.pow
 
 class MathOperations() {
 
@@ -31,15 +32,7 @@ class MathOperations() {
 
     fun Degree(firstNumber: Double, secondNumber: Double): Double
     {
-        var result: Double = 1.0
-        var tempValue = secondNumber
-
-        while (tempValue != 0.0) {
-            result *= firstNumber.toLong()
-            --tempValue
-        }
-
-        return result
+        return firstNumber.pow(secondNumber)
     }
 
     fun PlusMinus()
