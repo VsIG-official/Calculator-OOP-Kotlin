@@ -24,17 +24,14 @@ class MathOperations() {
         return firstNumber * secondNumber
     }
 
-    fun Mod()
+    fun Mod(firstNumber: Double, secondNumber: Double): Double
     {
-        operation = '%'
-        changeOneNumber()
-        procedure.text=operation.toString()
+        return firstNumber % secondNumber
     }
 
     fun Degree(firstNumber: Double, secondNumber: Double): Double
     {
-        var tempValue: Double = 0.0
-        tempValue=firstNumber
+        var tempValue = firstNumber
         for (i in secondNumber.toString()) {
             tempValue = firstNumber * secondNumber
         }
@@ -43,18 +40,18 @@ class MathOperations() {
 
     fun PlusMinus()
     {
-        var tempOperation = operation
-        operation = '±'
-        changeOneNumber()
-        operation = tempOperation
+        //var tempOperation = operation
+        //operation = '±'
+        //changeOneNumber()
+        //operation = tempOperation
     }
 
     fun Reciprocal()
     {
-        var tempOperation = operation
-        operation = 'R'
-        changeOneNumber()
-        operation = tempOperation
+        //var tempOperation = operation
+        //operation = 'R'
+        //changeOneNumber()
+        //operation = tempOperation
     }
 
 
