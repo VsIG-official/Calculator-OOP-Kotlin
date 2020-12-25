@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import com.example.calculator_oop_kotlin_project.MathOperations
 
 class MainActivity : AppCompatActivity()
 {
