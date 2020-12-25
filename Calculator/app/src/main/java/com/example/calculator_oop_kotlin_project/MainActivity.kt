@@ -10,16 +10,14 @@ import com.example.calculator_oop_kotlin_project.MathOperations
 class MainActivity : AppCompatActivity()
 {
     var operation: Char = ' '
-    var firstNumberToOperate: Double = 0.0
-    var secondNumberToOperate: Double = 0.0
     lateinit var MathClass: MathOperations
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        first_numbers.text="0.0"
-        MathClass = MathOperations(first_numbers, second_numbers)
+        firstNumber.text="0.0"
+        MathClass = MathOperations(firstNumber, secondNumber,procedure ,operation)
         setOnClickListeners()
     }
 
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity()
         divide_btn.setOnClickListener { divideFunction() }
         multiply_btn.setOnClickListener { multiplyFunction() }
         minus_btn.setOnClickListener { minusFunction() }
-        plus_btn.setOnClickListener { MathClass.Add() }
+        plus_btn.setOnClickListener { MathClass.Calculate('+') }
         equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
         mod_btn.setOnClickListener { modFunction() }
@@ -53,40 +51,193 @@ class MainActivity : AppCompatActivity()
 
     private fun appendText(number: String)
     {
-        second_numbers.append(number);
+        secondNumber.append(number);
         second_scroll.post { second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT) }
     }
 
     private fun clearAllText()
     {
-        first_numbers.text="0.0"
-        second_numbers.text=""
+        firstNumber.text="0.0"
+        secondNumber.text=""
         operation=' '
         procedure.text=""
     }
 
     private fun clearLastCharacter()
     {
-        val tempString = second_numbers.text.toString()
+        val tempString = secondNumber.text.toString()
         if (tempString.isNotEmpty())
         {
-            second_numbers.text = tempString.substring(0, tempString.length - 1)
+            secondNumber.text = tempString.substring(0, tempString.length - 1)
         }
     }
 
     private fun finishSecondNumber()
     {
-        if  (!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
+        if  (!firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty())
         {
-            equalsFunction()
+            MathClass.Equals()
         }
-        else if (!second_numbers.text.isNullOrEmpty())
+        else if (!secondNumber.text.isNullOrEmpty())
         {
-            first_numbers.text = second_numbers.text
-            first_numbers.append(".0")
-            second_numbers.text = ""
+            firstNumber.text = secondNumber.text
+            firstNumber.append(".0")
+            secondNumber.text = ""
         }
     }
 
+    fun Calculate(operation: Char): Double
+    {
+        when {
+            firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                // DO NOTHING
+            }
+            !secondNumber.text.isNullOrEmpty() -> {
+                val tempValue1 = firstNumber.text.toString()
+                val tempValue2 = secondNumber.text.toString()
 
+                var result: Double = 0.0
+                when (operation) {
+
+                    '+' -> {
+                        result = Add(tempValue1.toDouble(), tempValue2.toDouble())
+                        //result = tempValue1.toDouble() + tempValue2.toDouble()
+                    }
+
+                    '-' -> {
+                        result = tempValue1.toDouble() - tempValue2.toDouble()
+                    }
+
+                    '/' -> {
+                        result = tempValue1.toDouble() / tempValue2.toDouble()
+                    }
+
+                    '*' -> {
+                        result = tempValue1.toDouble() * tempValue2.toDouble()
+                    }
+
+                    '^' -> {
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                var tempValue3: Double = 0.0
+                                tempValue3=firstNumber.text.toString().toDouble()
+                                for (i in tempValue2) {
+                                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                                }
+                                result = tempValue3
+                            }
+                        }
+                    }
+
+                    '%' -> {
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
+                                // DO NOTHING
+                                result = tempValue1.toDouble()
+                            }
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue2.toDouble()
+                            }
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue1.toDouble() % tempValue2.toDouble()
+                            }
+                        }
+                    }
+
+                    '^' -> {
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
+                                // DO NOTHING
+                                result = tempValue1.toDouble()
+                            }
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue2.toDouble()
+                            }
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                var tempValue3: Double = 0.0
+                                tempValue3=firstNumber.text.toString().toDouble()
+                                for (i in tempValue2) {
+                                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                                }
+                                result = tempValue3
+                            }
+                        }
+                    }
+                }
+
+                // do this after calling calculate
+                firstNumber.text = result.toString()
+                secondNumber.text = ""
+
+                return result
+            }
+        }
+    }
+
+    fun ChangeOneNumber()
+    {
+        when {
+            !firstNumber.text.isNullOrEmpty() -> {
+                val tempValue1 = firstNumber.text.toString()
+                val tempValue2 = secondNumber.text.toString()
+
+                var result: Double = 0.0
+                when (operation) {
+
+                    '±' -> {
+                        result = tempValue1.toDouble() * -1
+                    }
+
+                    'R' -> {
+                        when {
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = 1 / tempValue2.toDouble()
+                            }
+                            else -> {
+                                result = 1 / tempValue1.toDouble()
+                            }
+                        }
+                    }
+
+                    '%' -> {
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
+                                // DO NOTHING
+                                result = tempValue1.toDouble()
+                            }
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue2.toDouble()
+                            }
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue1.toDouble() % tempValue2.toDouble()
+                            }
+                        }
+                    }
+
+                    '^' -> {
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
+                                // DO NOTHING
+                                result = tempValue1.toDouble()
+                            }
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue2.toDouble()
+                            }
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                var tempValue3: Double = 0.0
+                                tempValue3=firstNumber.text.toString().toDouble()
+                                for (i in tempValue2) {
+                                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
+                                }
+                                result = tempValue3
+                            }
+                        }
+                    }
+                }
+                firstNumber.text = result.toString()
+                secondNumber.text = ""
+            }
+        }
+    }
+}
 }
