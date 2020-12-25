@@ -72,7 +72,9 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun calculate(operation: Char) {
+    private fun calculate(operationChar: Char) {
+        operation = operationChar
+        procedure.text=operation.toString()
         when {
                 !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
                 {
@@ -80,7 +82,8 @@ class MainActivity : AppCompatActivity()
                 var tempValue2 = secondNumber.text.toString()
 
                 var result: Double = 0.0
-                when (operation) {
+
+                    when (operation) {
 
                     '+' -> {
                         result = MathClass.Add(tempValue1.toDouble(), tempValue2.toDouble())
@@ -91,11 +94,33 @@ class MainActivity : AppCompatActivity()
                     }
 
                     '/' -> {
-                        result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
+                                // DO NOTHING
+                                result = tempValue1.toDouble()
+                            }
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue2.toDouble()
+                            }
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
+                            }
+                        }
                     }
 
                     '*' -> {
-                        result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
+                        when {
+                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
+                                // DO NOTHING
+                                result = tempValue1.toDouble()
+                            }
+                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                result = tempValue2.toDouble()
+                            }
+                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                                result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
+                            }
+                        }
                     }
 
                     '^' -> {
@@ -132,7 +157,6 @@ class MainActivity : AppCompatActivity()
                 // do this after calling calculate
                 firstNumber.text = result.toString()
                 secondNumber.text = ""
-                procedure.text=operation.toString()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -163,41 +187,6 @@ class MainActivity : AppCompatActivity()
                             }
                             else -> {
                                 result = 1 / tempValue1.toDouble()
-                            }
-                        }
-                    }
-
-                    '%' -> {
-                        when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue1.toDouble() % tempValue2.toDouble()
-                            }
-                        }
-                    }
-
-                    '^' -> {
-                        when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                var tempValue3: Double = 0.0
-                                tempValue3=firstNumber.text.toString().toDouble()
-                                for (i in tempValue2) {
-                                    tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
-                                }
-                                result = tempValue3
                             }
                         }
                     }
