@@ -12,13 +12,15 @@ class MainActivity : AppCompatActivity()
     var operation: Char = ' '
     var firstNumberToOperate: Double = 0.0
     var secondNumberToOperate: Double = 0.0
+    lateinit var MathClass: MathOperations
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setOnClickListeners()
         first_numbers.text="0.0"
+        MathClass = MathOperations(first_numbers, second_numbers)
+        setOnClickListeners()
     }
 
     private fun setOnClickListeners()
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity()
         divide_btn.setOnClickListener { divideFunction() }
         multiply_btn.setOnClickListener { multiplyFunction() }
         minus_btn.setOnClickListener { minusFunction() }
-        plus_btn.setOnClickListener { plusFunction() }
+        plus_btn.setOnClickListener { MathClass.Add() }
         equals_btn.setOnClickListener { equalsFunction() }
         back_btn.setOnClickListener { clearLastCharacter() }
         mod_btn.setOnClickListener { modFunction() }
@@ -86,207 +88,5 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun plusFunction()
-    {
-        operation = '+'
-        finishSecondNumber()
-        procedure.text=operation.toString()
-    }
 
-    private fun minusFunction()
-    {
-        operation = '-'
-        finishSecondNumber()
-        procedure.text=operation.toString()
-    }
-
-    private fun divideFunction()
-    {
-        operation = '/'
-        finishSecondNumber()
-        procedure.text=operation.toString()
-    }
-
-    private fun multiplyFunction()
-    {
-        operation = '*'
-        finishSecondNumber()
-        procedure.text=operation.toString()
-    }
-
-    private fun modFunction()
-    {
-        operation = '%'
-        changeOneNumber()
-        procedure.text=operation.toString()
-    }
-
-    private fun degreeFunction()
-    {
-        operation = '^'
-        changeOneNumber()
-        procedure.text=operation.toString()
-    }
-
-    private fun plusMinusFunction()
-    {
-        var tempOperation = operation
-        operation = '±'
-        changeOneNumber()
-        operation = tempOperation
-    }
-
-    private fun reciprocalFunction()
-    {
-        var tempOperation = operation
-        operation = 'R'
-        changeOneNumber()
-        operation = tempOperation
-    }
-
-    private fun equalsFunction()
-    {
-        if(first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-        {
-            // DO NOTHING
-        }
-        else if (!second_numbers.text.isNullOrEmpty())
-        {
-            val tempValue1 = first_numbers.text.toString()
-            val tempValue2 = second_numbers.text.toString()
-
-            var result: Double = 0.0
-            if (operation == '+') {
-                result = tempValue1.toDouble() + tempValue2.toDouble()
-            } else if (operation == '-') {
-                result = tempValue1.toDouble() - tempValue2.toDouble()
-            } else if (operation == '/')
-            {
-                result = tempValue1.toDouble() / tempValue2.toDouble()
-            }
-            else if (operation == '*')
-            {
-                result = tempValue1.toDouble() * tempValue2.toDouble()
-            }
-            else if (operation == '^')
-            {
-                if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-                {
-                    var tempValue3: Double = 0.0
-                    tempValue3=first_numbers.text.toString().toDouble()
-                    for (i in tempValue2)
-                    {
-                        tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
-                    }
-                    result = tempValue3
-                }
-            }
-            else if (operation == '%')
-            {
-                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
-                {
-                    // DO NOTHING
-                    result = tempValue1.toDouble()
-                }
-                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = tempValue2.toDouble()
-                }
-                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = tempValue1.toDouble() % tempValue2.toDouble()
-                }
-            }
-            else if (operation == '^')
-            {
-                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
-                {
-                    // DO NOTHING
-                    result = tempValue1.toDouble()
-                }
-                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = tempValue2.toDouble()
-                }
-                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-                {
-                    var tempValue3: Double = 0.0
-                    tempValue3=first_numbers.text.toString().toDouble()
-                    for (i in tempValue2)
-                    {
-                        tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
-                    }
-                    result = tempValue3
-                }
-            }
-            first_numbers.text = result.toString()
-            second_numbers.text = ""
-        }
-    }
-
-    private fun changeOneNumber()
-    {
-        if(!first_numbers.text.isNullOrEmpty())
-        {
-            val tempValue1 = first_numbers.text.toString()
-            val tempValue2 = second_numbers.text.toString()
-
-            var result: Double = 0.0
-            if (operation == '±')
-            {
-                result = tempValue1.toDouble() * -1
-            }
-            else if (operation == 'R')
-            {
-                if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = 1 / tempValue2.toDouble()
-                }
-                else
-                {
-                    result = 1 / tempValue1.toDouble()
-                }
-            }
-            else if (operation == '%')
-            {
-                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
-                {
-                    // DO NOTHING
-                    result = tempValue1.toDouble()
-                }
-                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = tempValue2.toDouble()
-                }
-                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = tempValue1.toDouble() % tempValue2.toDouble()
-                }
-            }
-            else if (operation == '^')
-            {
-                if(!first_numbers.text.isNullOrEmpty() && second_numbers.text.isNullOrEmpty())
-                {
-                    // DO NOTHING
-                    result = tempValue1.toDouble()
-                }
-                else if (first_numbers.text=="0.0" && !second_numbers.text.isNullOrEmpty())
-                {
-                    result = tempValue2.toDouble()
-                }
-                else if(!first_numbers.text.isNullOrEmpty() && !second_numbers.text.isNullOrEmpty())
-                {
-                    var tempValue3: Double = 0.0
-                    tempValue3=first_numbers.text.toString().toDouble()
-                    for (i in tempValue2)
-                    {
-                        tempValue3 = tempValue1.toDouble() * tempValue2.toDouble()
-                    }
-                    result = tempValue3
-                }
-            }
-            first_numbers.text = result.toString()
-            second_numbers.text = ""
-        }
-    }
 }
