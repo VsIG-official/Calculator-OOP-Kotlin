@@ -31,11 +31,15 @@ class MathOperations() {
 
     fun Degree(firstNumber: Double, secondNumber: Double): Double
     {
-        var tempValue = firstNumber
-        for (i in secondNumber.toString()) {
-            tempValue = firstNumber * secondNumber
+        var result: Double = 1.0
+        var tempValue = secondNumber
+
+        while (tempValue != 0.0) {
+            result *= firstNumber.toLong()
+            --tempValue
         }
-        return tempValue
+
+        return result
     }
 
     fun PlusMinus()

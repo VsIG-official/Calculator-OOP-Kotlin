@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity()
         when {
                 !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
                 {
-                val tempValue1 = firstNumber.text.toString()
-                val tempValue2 = secondNumber.text.toString()
+                var tempValue1 = firstNumber.text.toString()
+                var tempValue2 = secondNumber.text.toString()
 
                 var result: Double = 0.0
                 when (operation) {
