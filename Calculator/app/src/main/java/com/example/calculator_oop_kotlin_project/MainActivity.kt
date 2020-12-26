@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity()
                             }
                         }
                         'R' -> {
-                            //result = MathClass.PlusMinus(tempValue1.toDouble())
+                            result = MathClass.Reciprocal(tempValue1.toDouble())
                             when {
                                 firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
                                     result = tempValue2.toDouble()
