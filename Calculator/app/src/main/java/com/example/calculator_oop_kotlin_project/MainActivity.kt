@@ -74,121 +74,20 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun plus()
-    {
-        // call operation.class
-        operation='+'
-    }
-
     private fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
+        var result:Double=0.0
 
         when {
-                !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
-                {
-                    OperatorClass.checkTwoNumbers(firstNumber, secondNumber)
+            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
+            {
+                result = OperatorClass.checkTwoNumbers(firstNumber, secondNumber)
 
-                    var tempValue1 = firstNumber.text.toString()
-                    var tempValue2 = secondNumber.text.toString()
-                    var result: Double = 0.0
-
-                    when (operation) {
-
-                    '+' -> {
-                        result = MathClass.Add(tempValue1.toDouble(), tempValue2.toDouble())
-                    }
-
-                    '-' -> {
-                        result = MathClass.Substract(tempValue1.toDouble(), tempValue2.toDouble())
-                    }
-
-                    '/' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                    '*' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                    '^' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Degree(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                    '%' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Mod(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                        '±' -> {
-                            result = MathClass.PlusMinus(tempValue1.toDouble())
-                            when {
-                                (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                                    result = tempValue2.toDouble()
-                                }
-                            }
-                        }
-
-                        'R' -> {
-                            result = MathClass.Reciprocal(tempValue1.toDouble())
-                            when {
-                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                    result = tempValue2.toDouble()
-                                }
-                            }
-                        }
-
-                        'S' -> {
-                            result = MathClass.sin(tempValue1.toDouble())
-                            when {
-                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                    result = tempValue2.toDouble()
-                                }
-                            }
-                        }
-
-                        'C' -> {
-                            result = MathClass.cos(tempValue1.toDouble())
-                            when {
-                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                    result = tempValue2.toDouble()
-                                }
-                            }
-                        }
-                }
-
-
-                    // do this after calling calculate
-                    firstNumber.text = result.toString()
-                    secondNumber.text = ""
-                }
+                // do this after calling calculate
+                firstNumber.text = result.toString()
+                secondNumber.text = ""
+            }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
@@ -219,6 +118,9 @@ class MainActivity : AppCompatActivity()
                 secondNumber.text = ""
             }
         }
+        // do this after calling calculate
+        firstNumber.text = result.toString()
+        secondNumber.text = ""
         procedure.text=operation.toString()
     }
 }

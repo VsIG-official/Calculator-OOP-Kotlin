@@ -25,16 +25,34 @@ open class Operator {
 class OperatorPlus : Operator(){
     override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
         var result: Double = 0.0
-        when {
-            !firstTextView.text.isNullOrEmpty() && !secondTextView.text.isNullOrEmpty() -> {
+
                 var mathClass = MathOperations()
 
                 var tempValue1 = firstTextView.text.toString()
                 var tempValue2 = secondTextView.text.toString()
 
                 result = mathClass.Add(tempValue1.toDouble(), tempValue2.toDouble())
-            }
-        }
+
+        return result
+    }
+
+    override fun checkOneNumber(firstTextView: TextView, secondTextView: TextView): Double {
+        // do nothing
+        return 0.0
+    }
+}
+
+class OperatorMinus : Operator(){
+    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
+        var result: Double = 0.0
+
+                var mathClass = MathOperations()
+
+                var tempValue1 = firstTextView.text.toString()
+                var tempValue2 = secondTextView.text.toString()
+
+                result = mathClass.Substract(tempValue1.toDouble(), tempValue2.toDouble())
+
         return result
     }
 
