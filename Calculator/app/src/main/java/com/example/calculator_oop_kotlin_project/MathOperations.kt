@@ -1,47 +1,56 @@
 package com.example.calculator_oop_kotlin_project
 
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.pow
 
 class MathOperations() {
 
-    fun Add(firstNumber: Double, secondNumber: Double): Double
+    fun add(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber + secondNumber
     }
 
-    fun Substract(firstNumber: Double, secondNumber: Double): Double
+    fun subtract(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber - secondNumber
     }
 
-    fun Divide(firstNumber: Double, secondNumber: Double): Double
+    fun divide(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber / secondNumber
     }
 
-    fun Multiply(firstNumber: Double, secondNumber: Double): Double
+    fun multiply(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber * secondNumber
     }
 
-    fun Mod(firstNumber: Double, secondNumber: Double): Double
+    fun mod(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber % secondNumber
     }
 
-    fun Degree(firstNumber: Double, secondNumber: Double): Double
+    fun degree(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber.pow(secondNumber)
     }
 
-    fun PlusMinus(firstNumber: Double): Double
+    fun plusMinus(firstNumber: Double): Double
     {
         return firstNumber * -1
     }
 
-    fun Reciprocal(firstNumber: Double): Double
+    fun reciprocal(firstNumber: Double): Double
     {
         return 1 / firstNumber
+    }
+
+    fun sin(firstNumber: Double): Double
+    {
+        return kotlin.math.sin(firstNumber)
+    }
+
+    fun cos(firstNumber: Double): Double
+    {
+        return kotlin.math.cos(firstNumber)
     }
 }

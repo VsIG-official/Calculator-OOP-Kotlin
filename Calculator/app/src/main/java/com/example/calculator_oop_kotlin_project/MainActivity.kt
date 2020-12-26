@@ -5,19 +5,18 @@ import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import com.example.calculator_oop_kotlin_project.MathOperations
 
 class MainActivity : AppCompatActivity()
 {
     var operation: Char = ' '
-    lateinit var MathClass: MathOperations
+
+    lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firstNumber.text="0.0"
-        MathClass = MathOperations()
         setOnClickListeners()
     }
 
@@ -25,16 +24,18 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { calculate('±') }
-        one_divide_x_btn.setOnClickListener { calculate('R') }
-        divide_btn.setOnClickListener { calculate('/') }
-        multiply_btn.setOnClickListener { calculate('*') }
-        minus_btn.setOnClickListener { calculate('-') }
-        plus_btn.setOnClickListener { calculate('+') }
-        equals_btn.setOnClickListener { calculate(operation) }
+        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
+        one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
+        sin_btn.setOnClickListener { calculate('S', OperatorSin()) }
+        cos_btn.setOnClickListener { calculate('C', OperatorCos()) }
+        divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
+        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
+        minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
+        plus_btn.setOnClickListener { calculate('+', OperatorPlus()) }
+        equals_btn.setOnClickListener { calculate(operation, lastOperator) }
         back_btn.setOnClickListener { clearLastCharacter() }
-        mod_btn.setOnClickListener { calculate('%') }
-        degree_btn.setOnClickListener { calculate('^') }
+        mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
+        degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
 
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
@@ -72,93 +73,30 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun calculate(operationChar: Char) {
+    private fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
 
+        lastOperator = OperatorClass
+
+        var result:Double=0.0
+
+        var tempValue1 = firstNumber.text.toString()
+        var tempValue2 = secondNumber.text.toString()
+
         when {
-                !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
-                {
-                    var tempValue1 = firstNumber.text.toString()
-                    var tempValue2 = secondNumber.text.toString()
-                    var result: Double = 0.0
+            !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue1.toDouble()
+            }
 
-                    when (operation) {
+            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toDouble()
+            }
 
-                    '+' -> {
-                        result = MathClass.Add(tempValue1.toDouble(), tempValue2.toDouble())
-                    }
-
-                    '-' -> {
-                        result = MathClass.Substract(tempValue1.toDouble(), tempValue2.toDouble())
-                    }
-
-                    '/' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                    '*' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                    '^' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Degree(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-
-                    '%' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Mod(tempValue1.toDouble(), tempValue2.toDouble())
-                            }
-                        }
-                    }
-                        '±' -> {
-                            result = MathClass.PlusMinus(tempValue1.toDouble())
-                            when {
-                                (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                                    result = tempValue2.toDouble()
-                                }
-                            }
-                        }
-                        'R' -> {
-                            result = MathClass.Reciprocal(tempValue1.toDouble())
-                            when {
-                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                    result = tempValue2.toDouble()
-                                }
-                            }
-                        }
-                }
-
-
-                    // do this after calling calculate
-                    firstNumber.text = result.toString()
-                    secondNumber.text = ""
-                }
+            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
+            {
+                result = OperatorClass.checkTwoNumbers(firstNumber, secondNumber)
+            }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
@@ -167,23 +105,13 @@ class MainActivity : AppCompatActivity()
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                var tempValue1 = firstNumber.text.toString()
-                var tempValue2 = secondNumber.text.toString()
-                var result: Double = 0.0
-
-                when (operation){
-                    '±' -> {
-                                result = MathClass.PlusMinus(tempValue1.toDouble())
-                    }
-                    'R' -> {
-                                result = MathClass.Reciprocal(tempValue1.toDouble())
-                    }
-                }
-                // do this after calling calculate
-                firstNumber.text = result.toString()
-                secondNumber.text = ""
+                result = OperatorClass.checkOneNumber(firstNumber)
             }
         }
+
+        // do this after calling calculate
+        firstNumber.text = result.toString()
+        secondNumber.text = ""
         procedure.text=operation.toString()
     }
 }
