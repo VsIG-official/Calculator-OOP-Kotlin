@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity()
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(firstNumber, secondNumber)
+                result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity()
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(firstNumber)
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
             }
         }
 
@@ -149,6 +149,5 @@ class MainActivity : AppCompatActivity()
 
         val mDialog = mBuilder.create()
         mDialog.show()
-
     }
 }

@@ -71,9 +71,18 @@ class BinaryActivity : AppCompatActivity() {
         lastOperator = OperatorClass
 
         var result:Double=0.0
+        var tempResult:Double=0.0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
+
+        // convert to binary
+        var tempBinaryValue1 = Integer.toBinaryString(tempValue1.toInt())
+        var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
+
+        // convert to decimal
+        //tempValue1 = Integer.parseInt(tempBinaryValue1, 2).toString()
+        //tempValue2 = Integer.parseInt(tempBinaryValue2, 2).toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
@@ -86,7 +95,8 @@ class BinaryActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(firstNumber, secondNumber)
+                tempResult = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
+                result = Integer.toBinaryString(tempResult.toInt()).toDouble()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -96,7 +106,7 @@ class BinaryActivity : AppCompatActivity() {
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(firstNumber)
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
             }
         }
 
@@ -138,6 +148,5 @@ class BinaryActivity : AppCompatActivity() {
 
         val mDialog = mBuilder.create()
         mDialog.show()
-
     }
 }
