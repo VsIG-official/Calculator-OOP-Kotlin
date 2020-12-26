@@ -40,13 +40,8 @@ class MathOperations() {
         return firstNumber * -1
     }
 
-    fun Reciprocal()
+    fun Reciprocal(firstNumber: Double): Double
     {
-        //var tempOperation = operation
-        //operation = 'R'
-        //changeOneNumber()
-        //operation = tempOperation
+        return 1 / firstNumber
     }
-
-
 }

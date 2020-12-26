@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity()
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { calculate('±') }
-        //one_divide_x_btn.setOnClickListener { reciprocalFunction() }
+        one_divide_x_btn.setOnClickListener { calculate('R') }
         divide_btn.setOnClickListener { calculate('/') }
         multiply_btn.setOnClickListener { calculate('*') }
         minus_btn.setOnClickListener { calculate('-') }
@@ -144,6 +144,14 @@ class MainActivity : AppCompatActivity()
                                 }
                             }
                         }
+                        'R' -> {
+                            //result = MathClass.PlusMinus(tempValue1.toDouble())
+                            when {
+                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                    result = tempValue2.toDouble()
+                                }
+                            }
+                        }
                 }
 
 
@@ -168,14 +176,7 @@ class MainActivity : AppCompatActivity()
                                 result = MathClass.PlusMinus(tempValue1.toDouble())
                     }
                     'R' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
-                            }
-                            !firstNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.PlusMinus(tempValue1.toDouble())
-                            }
-                        }
+                                result = MathClass.Reciprocal(tempValue1.toDouble())
                     }
                 }
                 // do this after calling calculate
@@ -183,33 +184,6 @@ class MainActivity : AppCompatActivity()
                 secondNumber.text = ""
             }
         }
-
         procedure.text=operation.toString()
-    }
-
-    fun changeOneNumber(operationChar: Char) {
-        when {
-            !firstNumber.text.isNullOrEmpty() -> {
-                val tempValue1 = firstNumber.text.toString()
-                val tempValue2 = secondNumber.text.toString()
-
-                var result: Double = 0.0
-                when (operationChar) {
-
-                    'R' -> {
-                        when {
-                            firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = 1 / tempValue2.toDouble()
-                            }
-                            else -> {
-                                result = 1 / tempValue1.toDouble()
-                            }
-                        }
-                    }
-                }
-                firstNumber.text = result.toString()
-                secondNumber.text = ""
-            }
-        }
     }
 }
