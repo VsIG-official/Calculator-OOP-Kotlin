@@ -78,8 +78,13 @@ class MainActivity : AppCompatActivity()
         // current operation
         operation = operationChar
         var result:Double=0.0
+        var tempValue2 = secondNumber.text.toString()
 
         when {
+            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toDouble()
+            }
+
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
                 result = OperatorClass.checkTwoNumbers(firstNumber, secondNumber)
@@ -95,6 +100,7 @@ class MainActivity : AppCompatActivity()
                 result = OperatorClass.checkOneNumber(firstNumber)
             }
         }
+
         // do this after calling calculate
         firstNumber.text = result.toString()
         secondNumber.text = ""
