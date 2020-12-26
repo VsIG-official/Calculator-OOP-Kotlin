@@ -35,12 +35,9 @@ class MathOperations() {
         return firstNumber.pow(secondNumber)
     }
 
-    fun PlusMinus()
+    fun PlusMinus(firstNumber: Double): Double
     {
-        //var tempOperation = operation
-        //operation = '±'
-        //changeOneNumber()
-        //operation = tempOperation
+        return firstNumber * -1
     }
 
     fun Reciprocal()

@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
-        //plus_minus_btn.setOnClickListener { plusMinusFunction() }
+        plus_minus_btn.setOnClickListener { calculate('±') }
         //one_divide_x_btn.setOnClickListener { reciprocalFunction() }
         divide_btn.setOnClickListener { calculate('/') }
         multiply_btn.setOnClickListener { calculate('*') }
@@ -73,16 +73,18 @@ class MainActivity : AppCompatActivity()
     }
 
     private fun calculate(operationChar: Char) {
+        // last operation
+        var tempOperation = operation
+        // current operation
         operation = operationChar
-        procedure.text=operation.toString()
+
+        var tempValue1 = firstNumber.text.toString()
+        var tempValue2 = secondNumber.text.toString()
+        var result: Double = 0.0
+
         when {
                 !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
                 {
-                var tempValue1 = firstNumber.text.toString()
-                var tempValue2 = secondNumber.text.toString()
-
-                var result: Double = 0.0
-
                     when (operation) {
 
                     '+' -> {
@@ -94,61 +96,45 @@ class MainActivity : AppCompatActivity()
                     }
 
                     '/' -> {
-                        when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
+                        result = when {
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
+                                tempValue2.toDouble()
                             }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
+                            else -> {
+                                MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
                     }
 
                     '*' -> {
-                        when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
+                        result = when {
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
+                                tempValue2.toDouble()
                             }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
+                            else -> {
+                                MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
                     }
 
                     '^' -> {
-                        when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
+                        result = when {
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
+                                tempValue2.toDouble()
                             }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Degree(tempValue1.toDouble(), tempValue2.toDouble())
+                            else -> {
+                                MathClass.Degree(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
                     }
 
                     '%' -> {
-                        when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
+                        result = when {
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
-                                result = tempValue2.toDouble()
+                                tempValue2.toDouble()
                             }
-                            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
-                                result = MathClass.Mod(tempValue1.toDouble(), tempValue2.toDouble())
+                            else -> {
+                                MathClass.Mod(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
                     }
@@ -159,25 +145,36 @@ class MainActivity : AppCompatActivity()
                 secondNumber.text = ""
             }
 
+            !firstNumber.text.isNullOrEmpty() -> {
+                when(operation) {
+
+                }
+                firstNumber.text = result.toString()
+            }
+
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
                 firstNumber.append(".0")
                 secondNumber.text = ""
             }
         }
+        procedure.text=operation.toString()
     }
 
-    fun changeOneNumber(operation: Char) {
+    fun changeOneNumber(operationChar: Char) {
         when {
             !firstNumber.text.isNullOrEmpty() -> {
                 val tempValue1 = firstNumber.text.toString()
                 val tempValue2 = secondNumber.text.toString()
 
                 var result: Double = 0.0
-                when (operation) {
+                when (operationChar) {
 
                     '±' -> {
+                        var tempOperation = operation
+                        operation = '±'
                         result = tempValue1.toDouble() * -1
+                        operation = tempOperation
                     }
 
                     'R' -> {
