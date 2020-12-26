@@ -1,26 +1,24 @@
-
 package com.example.calculator_oop_kotlin_project
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_hexadecimal.*
 
-class MainActivity : AppCompatActivity()
-{
+class HexadecimalActivity : AppCompatActivity() {
     var operation: Char = ' '
 
     lateinit var lastOperator: Operator
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_hexadecimal)
         firstNumber.text="0.0"
         setOnClickListeners()
     }
+
 
     private fun setOnClickListeners()
     {
@@ -39,6 +37,12 @@ class MainActivity : AppCompatActivity()
         mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
         degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
 
+        f_btn.setOnClickListener { appendText("F") }
+        e_btn.setOnClickListener { appendText("E") }
+        d_btn.setOnClickListener { appendText("D") }
+        c_btn.setOnClickListener { appendText("C") }
+        b_btn.setOnClickListener { appendText("B") }
+        a_btn.setOnClickListener { appendText("A") }
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
         seven_btn.setOnClickListener { appendText("7") }
@@ -121,7 +125,7 @@ class MainActivity : AppCompatActivity()
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
-        val mBuilder = AlertDialog.Builder(this@MainActivity)
+        val mBuilder = AlertDialog.Builder(this@HexadecimalActivity)
         mBuilder.setTitle("Type of Calculator")
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
@@ -151,4 +155,5 @@ class MainActivity : AppCompatActivity()
         mDialog.show()
 
     }
+
 }

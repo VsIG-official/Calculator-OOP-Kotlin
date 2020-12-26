@@ -6,6 +6,7 @@ class MathOperations() {
 
     fun add(firstNumber: Double, secondNumber: Double): Double
     {
+        val decimal = Integer.toBinaryString(num)
         return firstNumber + secondNumber
     }
 
