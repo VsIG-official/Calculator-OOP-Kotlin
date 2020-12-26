@@ -3,6 +3,7 @@ package com.example.calculator_oop_kotlin_project
 
 import android.os.Bundle
 import android.widget.HorizontalScrollView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity()
 
     private fun setOnClickListeners()
     {
-        options_btn.setOnClickListener {  }
+        options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
         one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
@@ -113,5 +114,24 @@ class MainActivity : AppCompatActivity()
         firstNumber.text = result.toString()
         secondNumber.text = ""
         procedure.text=operation.toString()
+    }
+
+    private fun options()
+    {
+        val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
+        val mBuilder = AlertDialog.Builder(this@MainActivity)
+        mBuilder.setTitle("Type of Calculator")
+        mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
+            //txtView.text = listItems[i]
+            dialogInterface.dismiss()
+        }
+        // Set the neutral/cancel button click listener
+        mBuilder.setNeutralButton("Cancel") { dialog, which ->
+            // Do something when click the neutral button
+            dialog.cancel()
+        }
+
+        val mDialog = mBuilder.create()
+        mDialog.show()
     }
 }
