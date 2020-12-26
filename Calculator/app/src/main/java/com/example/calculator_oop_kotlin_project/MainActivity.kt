@@ -89,18 +89,16 @@ class MainActivity : AppCompatActivity()
 
                     '+' -> {
                         result = MathClass.Add(tempValue1.toDouble(), tempValue2.toDouble())
+
                     }
 
                     '-' -> {
                         result = MathClass.Substract(tempValue1.toDouble(), tempValue2.toDouble())
+
                     }
 
                     '/' -> {
                         when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
                                 result = tempValue2.toDouble()
                             }
@@ -108,14 +106,11 @@ class MainActivity : AppCompatActivity()
                                 result = MathClass.Divide(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
+
                     }
 
                     '*' -> {
                         when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
                                 result = tempValue2.toDouble()
                             }
@@ -123,14 +118,11 @@ class MainActivity : AppCompatActivity()
                                 result = MathClass.Multiply(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
+
                     }
 
                     '^' -> {
                         when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
                                 result = tempValue2.toDouble()
                             }
@@ -138,14 +130,11 @@ class MainActivity : AppCompatActivity()
                                 result = MathClass.Degree(tempValue1.toDouble(), tempValue2.toDouble())
                             }
                         }
+
                     }
 
                     '%' -> {
                         when {
-                            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() -> {
-                                // DO NOTHING
-                                result = tempValue1.toDouble()
-                            }
                             firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
                                 result = tempValue2.toDouble()
                             }
@@ -154,23 +143,24 @@ class MainActivity : AppCompatActivity()
                             }
                         }
                     }
+                        '±' -> {
+                            when {
+                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                    result = tempValue2.toDouble()
+                                }
+                                !firstNumber.text.isNullOrEmpty() -> {
+                                    result = MathClass.PlusMinus(tempValue1.toDouble())
+                                }
+                            }
+                        }
                 }
 
-                // do this after calling calculate
-                firstNumber.text = result.toString()
-                secondNumber.text = ""
-            }
-
-            !firstNumber.text.isNullOrEmpty() -> {
-                var tempValue1 = firstNumber.text.toString()
-                var tempValue2 = secondNumber.text.toString()
-                var result: Double = 0.0
-
-                when(operation) {
-
+                    // do this after calling calculate
+                    firstNumber.text = result.toString()
+                    secondNumber.text = " "
                 }
-                //firstNumber.text = result.toString()
-            }
+
+
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
