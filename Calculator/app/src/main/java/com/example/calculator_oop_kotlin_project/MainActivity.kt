@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity()
 {
     var operation: Char = ' '
     lateinit var MathClass: MathOperations
+    lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity()
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
         plus_btn.setOnClickListener { calculate('+', OperatorPlus()) }
-        //equals_btn.setOnClickListener { calculate(operation) }
+        equals_btn.setOnClickListener { calculate(operation, lastOperator) }
         back_btn.setOnClickListener { clearLastCharacter() }
         mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
         degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
@@ -77,6 +78,9 @@ class MainActivity : AppCompatActivity()
     private fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
+
+        lastOperator = OperatorClass
+
         var result:Double=0.0
         var tempValue2 = secondNumber.text.toString()
 
