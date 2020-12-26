@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import com.example.calculator_oop_kotlin_project.Operator
 
 class MainActivity : AppCompatActivity()
 {
     var operation: Char = ' '
-    lateinit var MathClass: MathOperations
+
     lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firstNumber.text="0.0"
-        MathClass = MathOperations()
         setOnClickListeners()
     }
 
@@ -82,9 +80,15 @@ class MainActivity : AppCompatActivity()
         lastOperator = OperatorClass
 
         var result:Double=0.0
+
+        var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
+            !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue1.toDouble()
+            }
+
             (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
                 result = tempValue2.toDouble()
             }
