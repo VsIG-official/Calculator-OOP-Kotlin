@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity()
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { calculate('±') }
         one_divide_x_btn.setOnClickListener { calculate('R') }
+        sin_btn.setOnClickListener { calculate('S') }
+        cos_btn.setOnClickListener { calculate('C') }
         divide_btn.setOnClickListener { calculate('/') }
         multiply_btn.setOnClickListener { calculate('*') }
         minus_btn.setOnClickListener { calculate('-') }
@@ -136,6 +138,7 @@ class MainActivity : AppCompatActivity()
                             }
                         }
                     }
+
                         '±' -> {
                             result = MathClass.PlusMinus(tempValue1.toDouble())
                             when {
@@ -144,8 +147,27 @@ class MainActivity : AppCompatActivity()
                                 }
                             }
                         }
+
                         'R' -> {
                             result = MathClass.Reciprocal(tempValue1.toDouble())
+                            when {
+                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                    result = tempValue2.toDouble()
+                                }
+                            }
+                        }
+
+                        'S' -> {
+                            result = MathClass.sin(tempValue1.toDouble())
+                            when {
+                                firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
+                                    result = tempValue2.toDouble()
+                                }
+                            }
+                        }
+
+                        'C' -> {
+                            result = MathClass.cos(tempValue1.toDouble())
                             when {
                                 firstNumber.text=="0.0" && !secondNumber.text.isNullOrEmpty() -> {
                                     result = tempValue2.toDouble()
@@ -177,6 +199,12 @@ class MainActivity : AppCompatActivity()
                     }
                     'R' -> {
                                 result = MathClass.Reciprocal(tempValue1.toDouble())
+                    }
+                    'S' -> {
+                        result = MathClass.sin(tempValue1.toDouble())
+                    }
+                    'C' -> {
+                        result = MathClass.cos(tempValue1.toDouble())
                     }
                 }
                 // do this after calling calculate

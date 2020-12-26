@@ -44,4 +44,14 @@ class MathOperations() {
     {
         return 1 / firstNumber
     }
+
+    fun sin(firstNumber: Double): Double
+    {
+        return kotlin.math.sin(firstNumber)
+    }
+
+    fun cos(firstNumber: Double): Double
+    {
+        return kotlin.math.cos(firstNumber)
+    }
 }
