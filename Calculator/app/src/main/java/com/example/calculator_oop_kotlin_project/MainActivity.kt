@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import com.example.calculator_oop_kotlin_project.MathOperations
+import com.example.calculator_oop_kotlin_project.Operator
 
 class MainActivity : AppCompatActivity()
 {
@@ -25,18 +25,18 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener {  }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { calculate('±') }
-        one_divide_x_btn.setOnClickListener { calculate('R') }
-        sin_btn.setOnClickListener { calculate('S') }
-        cos_btn.setOnClickListener { calculate('C') }
-        divide_btn.setOnClickListener { calculate('/') }
-        multiply_btn.setOnClickListener { calculate('*') }
-        minus_btn.setOnClickListener { calculate('-') }
-        plus_btn.setOnClickListener { calculate('+') }
-        equals_btn.setOnClickListener { calculate(operation) }
+       // plus_minus_btn.setOnClickListener { calculate('±') }
+       // one_divide_x_btn.setOnClickListener { calculate('R') }
+        //sin_btn.setOnClickListener { calculate('S') }
+        //cos_btn.setOnClickListener { calculate('C') }
+        //divide_btn.setOnClickListener { calculate('/') }
+        //multiply_btn.setOnClickListener { calculate('*') }
+        //minus_btn.setOnClickListener { calculate('-') }
+        plus_btn.setOnClickListener { calculate('+', OperatorPlus()) }
+        //equals_btn.setOnClickListener { calculate(operation) }
         back_btn.setOnClickListener { clearLastCharacter() }
-        mod_btn.setOnClickListener { calculate('%') }
-        degree_btn.setOnClickListener { calculate('^') }
+        //mod_btn.setOnClickListener { calculate('%') }
+        //degree_btn.setOnClickListener { calculate('^') }
 
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
@@ -74,7 +74,13 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun calculate(operationChar: Char) {
+    private fun plus()
+    {
+        // call operation.class
+        operation='+'
+    }
+
+    private fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
 
@@ -190,7 +196,6 @@ class MainActivity : AppCompatActivity()
 
             !firstNumber.text.isNullOrEmpty() ->{
                 var tempValue1 = firstNumber.text.toString()
-                var tempValue2 = secondNumber.text.toString()
                 var result: Double = 0.0
 
                 when (operation){
