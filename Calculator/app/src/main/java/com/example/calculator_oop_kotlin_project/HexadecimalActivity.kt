@@ -22,8 +22,6 @@ class HexadecimalActivity : AppCompatActivity() {
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
-        one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
         divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
