@@ -88,10 +88,13 @@ class BinaryActivity : AppCompatActivity() {
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
                 // convert to binary
-                //val intBits = java.lang.Double.doubleToIntBits(yourFloat)
-                //val binary = Integer.toBinaryString(intBits)
+                val intBits1 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
+                val binary1 = Integer.toBinaryString(intBits1)
 
-                //var tempBinaryValue1 = Double.toBinaryString(tempValue1)
+                val intBits2 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
+                val binary2 = Integer.toBinaryString(intBits2)
+
+                //var tempBinaryValue1 = Float.toBinaryString(tempValue1)
                 //var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
 
                 // convert to decimal
