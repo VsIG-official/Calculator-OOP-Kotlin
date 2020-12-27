@@ -88,21 +88,21 @@ class BinaryActivity : AppCompatActivity() {
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
                 // convert to binary
-                val intBits1 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
-                val binary1 = Integer.toBinaryString(intBits1)
+                //val intBits1 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
+                //val binary1 = Integer.toBinaryString(intBits1)
 
-                val intBits2 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
-                val binary2 = Integer.toBinaryString(intBits2)
+                //val intBits2 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
+                //val binary2 = Integer.toBinaryString(intBits2)
 
                 //var tempBinaryValue1 = Float.toBinaryString(tempValue1)
                 //var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
-
+                tempValue1 = tempValue1.toInt().toString()
                 // convert to decimal
-                //tempValue1 = Integer.parseDouble(tempBinaryValue1, 2).toString()
-                //tempValue2 = Integer.parseInt(tempBinaryValue2, 2).toString()
+                var tempDecimalValue1 = Integer.parseInt(tempValue1, 2)
+                var tempDecimalValue2 = Integer.parseInt(tempValue2, 2)
 
-                //tempResult = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
-                //result = Integer.toBinaryString(tempResult.toInt()).toDouble()
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(), tempDecimalValue2.toFloat())
+                result = Integer.toBinaryString(tempResult.toInt()).toFloat()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
