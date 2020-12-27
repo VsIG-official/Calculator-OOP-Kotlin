@@ -25,8 +25,6 @@ class BinaryActivity : AppCompatActivity() {
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
         one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
-        sin_btn.setOnClickListener { calculate('S', OperatorSin()) }
-        cos_btn.setOnClickListener { calculate('C', OperatorCos()) }
         divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
@@ -86,10 +84,6 @@ class BinaryActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                // convert to int
-                var tempBinaryValue1 = tempValue1.toInt()
-                var tempBinaryValue2 = tempValue2.toInt()
-
                 // convert to decimal
                 var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())
                 var tempDecimalValue2 = mathClass.convertBinaryToDecimal(tempValue2.toFloat())

@@ -170,16 +170,6 @@
                 android:text="="
                 android:textSize="50sp"/>
             <TextView
-                android:id="@+id/cos_btn"
-                style="@style/ActionButtonStyle"
-                android:text="cos"
-                android:textSize="30sp"/>
-            <TextView
-                android:id="@+id/sin_btn"
-                style="@style/ActionButtonStyle"
-                android:text="sin"
-                android:textSize="30sp"/>
-            <TextView
                 android:id="@+id/plus_btn"
                 style="@style/ActionButtonStyle"
                 android:text="+"
