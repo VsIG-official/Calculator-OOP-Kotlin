@@ -15,7 +15,7 @@ class BinaryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_binary)
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         setOnClickListeners()
     }
 
@@ -38,7 +38,6 @@ class BinaryActivity : AppCompatActivity() {
 
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
-        dot_btn.setOnClickListener { appendText(".") }
     }
 
     private fun appendText(number: String)
@@ -49,7 +48,7 @@ class BinaryActivity : AppCompatActivity() {
 
     private fun clearAllText()
     {
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         secondNumber.text=""
         operation=' '
         procedure.text=""
@@ -70,39 +69,24 @@ class BinaryActivity : AppCompatActivity() {
 
         lastOperator = OperatorClass
 
-        var result:Float=0.0f
-        var tempResult:Float=0.0f
+        var result:Int=0
+        var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toFloat()
+                result = tempValue1.toInt()
             }
 
-            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toFloat()
+            (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                // convert to binary
-                //val intBits1 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
-                //val binary1 = Integer.toBinaryString(intBits1)
-
-                //val intBits2 = java.lang.Float.floatToIntBits(tempValue1.toFloat())
-                //val binary2 = Integer.toBinaryString(intBits2)
-
-                //var tempBinaryValue1 = Float.toBinaryString(tempValue1)
-                //var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
-                tempValue1 = tempValue1.toInt().toString()
-                // convert to decimal
-                var tempDecimalValue1 = Integer.parseInt(tempValue1, 2)
-                var tempDecimalValue2 = Integer.parseInt(tempValue2, 2)
-
-                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(), tempDecimalValue2.toFloat())
-                result = Integer.toBinaryString(tempResult.toInt()).toFloat()
+//
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -112,7 +96,7 @@ class BinaryActivity : AppCompatActivity() {
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
+                //result = OperatorClass.checkOneNumber(tempValue1.toInt())
             }
         }
 

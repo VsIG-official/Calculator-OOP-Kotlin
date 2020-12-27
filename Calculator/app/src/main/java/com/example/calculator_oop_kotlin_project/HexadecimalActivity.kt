@@ -52,7 +52,6 @@ class HexadecimalActivity : AppCompatActivity() {
         two_btn.setOnClickListener { appendText("2") }
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
-        dot_btn.setOnClickListener { appendText(".") }
     }
 
     private fun appendText(number: String)
@@ -63,7 +62,7 @@ class HexadecimalActivity : AppCompatActivity() {
 
     private fun clearAllText()
     {
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         secondNumber.text=""
         operation=' '
         procedure.text=""
@@ -84,23 +83,23 @@ class HexadecimalActivity : AppCompatActivity() {
 
         lastOperator = OperatorClass
 
-        var result:Float=0.0f
+        var result:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toFloat()
+                result = tempValue1.toInt()
             }
 
             (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toFloat()
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toFloat(), tempValue2.toFloat())
+                //result = OperatorClass.checkTwoNumbers(tempValue1.toInt(), tempValue2.toInt())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -110,7 +109,7 @@ class HexadecimalActivity : AppCompatActivity() {
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
+                //result = OperatorClass.checkOneNumber(tempValue1.toInt())
             }
         }
 
