@@ -1,4 +1,3 @@
-
 package com.example.calculator_oop_kotlin_project
 
 import android.content.Intent
@@ -8,17 +7,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity()
-{
+class BinaryActivity : AppCompatActivity() {
     var operation: Char = ' '
-
+    var mathClass = MathOperations()
     lateinit var lastOperator: Operator
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        firstNumber.text="0.0"
+        setContentView(R.layout.activity_binary)
+        firstNumber.text="0"
         setOnClickListeners()
     }
 
@@ -26,10 +23,6 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
-        one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
-        sin_btn.setOnClickListener { calculate('S', OperatorSin()) }
-        cos_btn.setOnClickListener { calculate('C', OperatorCos()) }
         divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
@@ -39,17 +32,8 @@ class MainActivity : AppCompatActivity()
         mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
         degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
 
-        nine_btn.setOnClickListener { appendText("9") }
-        eight_btn.setOnClickListener { appendText("8") }
-        seven_btn.setOnClickListener { appendText("7") }
-        six_btn.setOnClickListener { appendText("6") }
-        five_btn.setOnClickListener { appendText("5") }
-        four_btn.setOnClickListener { appendText("4") }
-        three_btn.setOnClickListener { appendText("3") }
-        two_btn.setOnClickListener { appendText("2") }
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
-        dot_btn.setOnClickListener { appendText(".") }
     }
 
     private fun appendText(number: String)
@@ -60,7 +44,7 @@ class MainActivity : AppCompatActivity()
 
     private fun clearAllText()
     {
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         secondNumber.text=""
         operation=' '
         procedure.text=""
@@ -81,33 +65,40 @@ class MainActivity : AppCompatActivity()
 
         lastOperator = OperatorClass
 
-        var result:Float=0.0f
+        var result:Int=0
+        var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toFloat()
+                result = tempValue1.toInt()
             }
 
-            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toFloat()
+            (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toFloat(), tempValue2.toFloat())
+                // convert to decimal
+                var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())
+                var tempDecimalValue2 = mathClass.convertBinaryToDecimal(tempValue2.toFloat())
+
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+
+                result = mathClass.convertDecimalToBinary(tempResult.toFloat())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
-                firstNumber.append(".0")
                 secondNumber.text = ""
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
+                // convert to decimal
+                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toInt()
             }
         }
 
@@ -121,22 +112,22 @@ class MainActivity : AppCompatActivity()
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
-        val mBuilder = AlertDialog.Builder(this@MainActivity)
+        val mBuilder = AlertDialog.Builder(this@BinaryActivity)
         mBuilder.setTitle("Type of Calculator")
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
             dialogInterface.dismiss()
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this,MainActivity::class.java)
+                    var intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
                 "Binary" -> {
-                    var intent = Intent(this,BinaryActivity::class.java)
+                    var intent = Intent(this, BinaryActivity::class.java)
                     startActivity(intent)
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this,HexadecimalActivity::class.java)
+                    var intent = Intent(this, HexadecimalActivity::class.java)
                     startActivity(intent)
                 }
             }

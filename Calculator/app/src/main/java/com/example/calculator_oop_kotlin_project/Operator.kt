@@ -1,171 +1,98 @@
 package com.example.calculator_oop_kotlin_project
 
-import android.widget.TextView
-
 open class Operator {
-    open fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double
+    open fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float
     {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-        var tempValue2 = secondTextView.text.toString()
-
-        var result: Double = 0.0
+        var result: Float = 0.0f
         return result
     }
-    open fun checkOneNumber(firstTextView: TextView): Double
+    open fun checkOneNumber(firstNumber: Float): Float
     {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-
-        var result: Double = 0.0
+        var result: Float = 0.0f
         return result
     }
 }
 
 class OperatorPlus : Operator(){
-    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-        var tempValue2 = secondTextView.text.toString()
-
-        result = mathClass.add(tempValue1.toDouble(), tempValue2.toDouble())
-
-        return result
+        return mathClass.add(firstNumber, secondNumber)
     }
 }
 
 class OperatorMinus : Operator(){
-    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
-        var result: Double = 0.0
+    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+        var mathClass = MathOperations()
 
-                var mathClass = MathOperations()
-
-                var tempValue1 = firstTextView.text.toString()
-                var tempValue2 = secondTextView.text.toString()
-
-                result = mathClass.subtract(tempValue1.toDouble(), tempValue2.toDouble())
-
-        return result
+        return mathClass.subtract(firstNumber, secondNumber)
     }
 }
 
 class OperatorMod : Operator(){
-    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-        var tempValue2 = secondTextView.text.toString()
-
-        result = mathClass.mod(tempValue1.toDouble(), tempValue2.toDouble())
-
-        return result
+        return mathClass.mod(firstNumber, secondNumber)
     }
 }
 
 class OperatorDegree : Operator(){
-    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-        var tempValue2 = secondTextView.text.toString()
-
-        result = mathClass.degree(tempValue1.toDouble(), tempValue2.toDouble())
-
-        return result
+        return mathClass.degree(firstNumber, secondNumber)
     }
 }
 
 class OperatorMultiply : Operator(){
-    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-        var tempValue2 = secondTextView.text.toString()
-
-        result = mathClass.multiply(tempValue1.toDouble(), tempValue2.toDouble())
-
-        return result
+        return mathClass.multiply(firstNumber, secondNumber)
     }
 }
 
 class OperatorDivide : Operator(){
-    override fun checkTwoNumbers(firstTextView: TextView, secondTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-        var tempValue2 = secondTextView.text.toString()
-
-        result = mathClass.divide(tempValue1.toDouble(), tempValue2.toDouble())
-
-        return result
+        return mathClass.divide(firstNumber, secondNumber)
     }
 }
 
 class OperatorSin : Operator(){
-    override fun checkOneNumber(firstTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkOneNumber(firstNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-
-        result = mathClass.sin(tempValue1.toDouble())
-
-        return result
+        return mathClass.sin(firstNumber)
     }
 }
 
 class OperatorCos : Operator(){
-    override fun checkOneNumber(firstTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkOneNumber(firstNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-
-        result = mathClass.cos(tempValue1.toDouble())
-
-        return result
+        return mathClass.cos(firstNumber)
     }
 }
 
 class OperatorReciprocal : Operator(){
-    override fun checkOneNumber(firstTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkOneNumber(firstNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-
-        result = mathClass.reciprocal(tempValue1.toDouble())
-
-        return result
+        return mathClass.reciprocal(firstNumber)
     }
 }
 
 class OperatorPlusMinus : Operator(){
-    override fun checkOneNumber(firstTextView: TextView): Double {
-        var result: Double = 0.0
-
+    override fun checkOneNumber(firstNumber: Float): Float {
         var mathClass = MathOperations()
 
-        var tempValue1 = firstTextView.text.toString()
-
-        result = mathClass.plusMinus(tempValue1.toDouble())
-
-        return result
+        return mathClass.plusMinus(firstNumber)
     }
 }

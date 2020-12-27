@@ -1,23 +1,20 @@
-
 package com.example.calculator_oop_kotlin_project
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_hexadecimal.*
 
-class MainActivity : AppCompatActivity()
-{
+class HexadecimalActivity : AppCompatActivity() {
     var operation: Char = ' '
 
     lateinit var lastOperator: Operator
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_hexadecimal)
         firstNumber.text="0.0"
         setOnClickListeners()
     }
@@ -39,6 +36,12 @@ class MainActivity : AppCompatActivity()
         mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
         degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
 
+        f_btn.setOnClickListener { appendText("F") }
+        e_btn.setOnClickListener { appendText("E") }
+        d_btn.setOnClickListener { appendText("D") }
+        c_btn.setOnClickListener { appendText("C") }
+        b_btn.setOnClickListener { appendText("B") }
+        a_btn.setOnClickListener { appendText("A") }
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
         seven_btn.setOnClickListener { appendText("7") }
@@ -49,7 +52,6 @@ class MainActivity : AppCompatActivity()
         two_btn.setOnClickListener { appendText("2") }
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
-        dot_btn.setOnClickListener { appendText(".") }
     }
 
     private fun appendText(number: String)
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity()
 
     private fun clearAllText()
     {
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         secondNumber.text=""
         operation=' '
         procedure.text=""
@@ -81,33 +83,32 @@ class MainActivity : AppCompatActivity()
 
         lastOperator = OperatorClass
 
-        var result:Float=0.0f
+        var result:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toFloat()
+                result = tempValue1.toInt()
             }
 
             (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toFloat()
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toFloat(), tempValue2.toFloat())
+                //result = OperatorClass.checkTwoNumbers(tempValue1.toInt(), tempValue2.toInt())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
-                firstNumber.append(".0")
                 secondNumber.text = ""
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
+                //result = OperatorClass.checkOneNumber(tempValue1.toInt())
             }
         }
 
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity()
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
-        val mBuilder = AlertDialog.Builder(this@MainActivity)
+        val mBuilder = AlertDialog.Builder(this@HexadecimalActivity)
         mBuilder.setTitle("Type of Calculator")
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
