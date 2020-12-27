@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class BinaryActivity : AppCompatActivity() {
     var operation: Char = ' '
-
+    var mathClass = MathOperations()
     lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,17 +86,26 @@ class BinaryActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-//
+                // convert to int
+                var tempBinaryValue1 = tempValue1.toInt()
+                var tempBinaryValue2 = tempValue2.toInt()
+
+                // convert to decimal
+                var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())
+                var tempDecimalValue2 = mathClass.convertBinaryToDecimal(tempValue2.toFloat())
+
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+
+                result = mathClass.convertDecimalToBinary(tempResult.toFloat())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
-                firstNumber.append(".0")
                 secondNumber.text = ""
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                //result = OperatorClass.checkOneNumber(tempValue1.toInt())
+                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toInt()
             }
         }
 
