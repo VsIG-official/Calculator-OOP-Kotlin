@@ -116,20 +116,12 @@
                 android:text="C"
                 android:textSize="30sp"/>
             <TextView
-                android:id="@+id/plus_minus_btn"
+                android:id="@+id/degree_btn"
                 style="@style/ActionButtonStyle"
-                android:text="±"
+                android:text="^"
                 android:textSize="40sp"/>
-            <TextView
-                android:id="@+id/one_divide_x_btn"
-                style="@style/ActionButtonStyle"
-                android:text="1/X"
-                android:textSize="30sp"/>
-            <TextView
-                android:id="@+id/multiply_btn"
-                style="@style/ActionButtonStyle"
-                android:text="*"
-                android:textSize="40sp"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -148,15 +140,11 @@
                 android:text="%"
                 android:textSize="30sp"/>
             <TextView
-                android:id="@+id/degree_btn"
+                android:id="@+id/multiply_btn"
                 style="@style/ActionButtonStyle"
-                android:text="^"
+                android:text="*"
                 android:textSize="40sp"/>
-            <TextView
-                android:id="@+id/minus_btn"
-                style="@style/ActionButtonStyle"
-                android:text="-"
-                android:textSize="60sp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -164,16 +152,22 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
             <TextView
-                android:id="@+id/equals_btn"
+                android:id="@+id/minus_btn"
                 style="@style/ActionButtonStyle"
-                android:text="="
-                android:textSize="50sp"/>
+                android:text="-"
+                android:textSize="60sp"/>
             <TextView
                 android:id="@+id/plus_btn"
                 style="@style/ActionButtonStyle"
                 android:text="+"
                 android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/equals_btn"
+                style="@style/ActionButtonStyle"
+                android:text="="
+                android:textSize="50sp"/>
         </LinearLayout>
 
         <LinearLayout
