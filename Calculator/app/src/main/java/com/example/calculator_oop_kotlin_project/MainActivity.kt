@@ -1,4 +1,3 @@
-
 package com.example.calculator_oop_kotlin_project
 
 import android.content.Intent
@@ -8,11 +7,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity()
+open class MainActivity : AppCompatActivity()
 {
-    var operation: Char = ' '
-
-    lateinit var lastOperator: Operator
+    open var operation: Char = ' '
+    open lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -22,7 +20,7 @@ class MainActivity : AppCompatActivity()
         setOnClickListeners()
     }
 
-    private fun setOnClickListeners()
+    open fun setOnClickListeners()
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
@@ -52,13 +50,13 @@ class MainActivity : AppCompatActivity()
         dot_btn.setOnClickListener { appendText(".") }
     }
 
-    private fun appendText(number: String)
+    fun appendText(number: String)
     {
         secondNumber.append(number);
         second_scroll.post { second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT) }
     }
 
-    private fun clearAllText()
+    open fun clearAllText()
     {
         firstNumber.text="0.0"
         secondNumber.text=""
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity()
         procedure.text=""
     }
 
-    private fun clearLastCharacter()
+    fun clearLastCharacter()
     {
         val tempString = secondNumber.text.toString()
         if (tempString.isNotEmpty())
@@ -75,7 +73,7 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun calculate(operationChar: Char, OperatorClass: Operator) {
+    open fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
 
@@ -117,7 +115,7 @@ class MainActivity : AppCompatActivity()
         procedure.text=operation.toString()
     }
 
-    private fun options()
+    open fun options()
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")

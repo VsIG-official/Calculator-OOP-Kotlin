@@ -5,21 +5,21 @@ import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_binary.*
 
-class BinaryActivity : AppCompatActivity() {
-    var operation: Char = ' '
+class BinaryActivity : MainActivity() {
+    override var operation: Char = ' '
     var mathClass = MathOperations()
-    lateinit var lastOperator: Operator
+    override lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_binary)
-        firstNumber.text="0"
         setOnClickListeners()
+        firstNumber.text="0"
     }
 
-    private fun setOnClickListeners()
+    override fun setOnClickListeners()
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
@@ -36,13 +36,7 @@ class BinaryActivity : AppCompatActivity() {
         zero_btn.setOnClickListener { appendText("0") }
     }
 
-    private fun appendText(number: String)
-    {
-        secondNumber.append(number);
-        second_scroll.post { second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT) }
-    }
-
-    private fun clearAllText()
+    override fun clearAllText()
     {
         firstNumber.text="0"
         secondNumber.text=""
@@ -50,16 +44,7 @@ class BinaryActivity : AppCompatActivity() {
         procedure.text=""
     }
 
-    private fun clearLastCharacter()
-    {
-        val tempString = secondNumber.text.toString()
-        if (tempString.isNotEmpty())
-        {
-            secondNumber.text = tempString.substring(0, tempString.length - 1)
-        }
-    }
-
-    private fun calculate(operationChar: Char, OperatorClass: Operator) {
+    override fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
 
@@ -108,7 +93,7 @@ class BinaryActivity : AppCompatActivity() {
         procedure.text=operation.toString()
     }
 
-    private fun options()
+    override fun options()
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
@@ -119,15 +104,15 @@ class BinaryActivity : AppCompatActivity() {
             dialogInterface.dismiss()
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this, MainActivity::class.java)
+                    var intent = Intent(this,MainActivity::class.java)
                     startActivity(intent)
                 }
                 "Binary" -> {
-                    var intent = Intent(this, BinaryActivity::class.java)
+                    var intent = Intent(this,BinaryActivity::class.java)
                     startActivity(intent)
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this, HexadecimalActivity::class.java)
+                    var intent = Intent(this,HexadecimalActivity::class.java)
                     startActivity(intent)
                 }
             }

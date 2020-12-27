@@ -1,24 +1,27 @@
 package com.example.calculator_oop_kotlin_project
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.HorizontalScrollView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_hexadecimal.*
 
-class HexadecimalActivity : AppCompatActivity() {
-    var operation: Char = ' '
-    lateinit var lastOperator: Operator
+class HexadecimalActivity : MainActivity() {
+    override var operation: Char = ' '
+    override lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hexadecimal)
         firstNumber.text="0"
-        setOnClickListeners()
+        val f_btn = findViewById<TextView>(R.id.f_btn)
+        f_btn.setOnClickListener { appendText("F") }
+        super.setOnClickListeners()
     }
 
-    private fun setOnClickListeners()
+    override fun setOnClickListeners()
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
@@ -31,12 +34,12 @@ class HexadecimalActivity : AppCompatActivity() {
         mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
         degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
 
-        f_btn.setOnClickListener { appendText("F") }
-        e_btn.setOnClickListener { appendText("E") }
-        d_btn.setOnClickListener { appendText("D") }
-        c_btn.setOnClickListener { appendText("C") }
-        b_btn.setOnClickListener { appendText("B") }
-        a_btn.setOnClickListener { appendText("A") }
+
+        findViewById<TextView>(R.id.e_btn).setOnClickListener { appendText("E") }
+        findViewById<TextView>(R.id.d_btn).setOnClickListener { appendText("D") }
+        findViewById<TextView>(R.id.c_btn).setOnClickListener { appendText("C") }
+        findViewById<TextView>(R.id.b_btn).setOnClickListener { appendText("B") }
+        findViewById<TextView>(R.id.a_btn).setOnClickListener { appendText("A") }
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
         seven_btn.setOnClickListener { appendText("7") }
@@ -49,13 +52,7 @@ class HexadecimalActivity : AppCompatActivity() {
         zero_btn.setOnClickListener { appendText("0") }
     }
 
-    private fun appendText(number: String)
-    {
-        secondNumber.append(number);
-        second_scroll.post { second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT) }
-    }
-
-    private fun clearAllText()
+    override fun clearAllText()
     {
         firstNumber.text="0"
         secondNumber.text=""
@@ -63,16 +60,7 @@ class HexadecimalActivity : AppCompatActivity() {
         procedure.text=""
     }
 
-    private fun clearLastCharacter()
-    {
-        val tempString = secondNumber.text.toString()
-        if (tempString.isNotEmpty())
-        {
-            secondNumber.text = tempString.substring(0, tempString.length - 1)
-        }
-    }
-
-    private fun calculate(operationChar: Char, OperatorClass: Operator) {
+    override fun calculate(operationChar: Char, OperatorClass: Operator) {
         // current operation
         operation = operationChar
 
@@ -116,12 +104,12 @@ class HexadecimalActivity : AppCompatActivity() {
         }
 
         // do this after calling calculate
-        firstNumber.text = result.toString()
+        firstNumber.text = result
         secondNumber.text = ""
         procedure.text=operation.toString()
     }
 
-    private fun options()
+    override fun options()
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
@@ -132,16 +120,13 @@ class HexadecimalActivity : AppCompatActivity() {
             dialogInterface.dismiss()
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,MainActivity::class.java))
                 }
                 "Binary" -> {
-                    var intent = Intent(this,BinaryActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,BinaryActivity::class.java))
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this,HexadecimalActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,HexadecimalActivity::class.java))
                 }
             }
         }
