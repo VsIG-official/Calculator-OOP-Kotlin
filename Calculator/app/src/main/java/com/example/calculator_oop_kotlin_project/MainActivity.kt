@@ -81,23 +81,23 @@ class MainActivity : AppCompatActivity()
 
         lastOperator = OperatorClass
 
-        var result:Double=0.0
+        var result:Float=0.0f
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toDouble()
+                result = tempValue1.toFloat()
             }
 
             (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toDouble()
+                result = tempValue2.toFloat()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
+                result = OperatorClass.checkTwoNumbers(tempValue1.toFloat(), tempValue2.toFloat())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity()
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
+                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
             }
         }
 
