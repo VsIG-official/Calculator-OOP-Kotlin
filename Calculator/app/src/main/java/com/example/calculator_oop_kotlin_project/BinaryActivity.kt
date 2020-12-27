@@ -1,10 +1,10 @@
 package com.example.calculator_oop_kotlin_project
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class BinaryActivity : AppCompatActivity() {
@@ -76,14 +76,6 @@ class BinaryActivity : AppCompatActivity() {
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
-        // convert to binary
-        var tempBinaryValue1 = Integer.toBinaryString(tempValue1.toInt())
-        var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
-
-        // convert to decimal
-        //tempValue1 = Integer.parseInt(tempBinaryValue1, 2).toString()
-        //tempValue2 = Integer.parseInt(tempBinaryValue2, 2).toString()
-
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
                 result = tempValue1.toDouble()
@@ -95,7 +87,21 @@ class BinaryActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                tempResult = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
+                // convert to binary
+                //val intBits = java.lang.Double.doubleToIntBits(yourFloat)
+                //val binary = Integer.toBinaryString(intBits)
+
+                //var tempBinaryValue1 = Double.toBinaryString(tempValue1)
+                //var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
+
+                // convert to decimal
+                //tempValue1 = Integer.parseDouble(tempBinaryValue1, 2).toString()
+                //tempValue2 = Integer.parseInt(tempBinaryValue2, 2).toString()
+
+                tempResult = OperatorClass.checkTwoNumbers(
+                    tempValue1.toDouble(),
+                    tempValue2.toDouble()
+                )
                 result = Integer.toBinaryString(tempResult.toInt()).toDouble()
             }
 
@@ -127,15 +133,15 @@ class BinaryActivity : AppCompatActivity() {
             dialogInterface.dismiss()
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this,MainActivity::class.java)
+                    var intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
                 "Binary" -> {
-                    var intent = Intent(this,BinaryActivity::class.java)
+                    var intent = Intent(this, BinaryActivity::class.java)
                     startActivity(intent)
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this,HexadecimalActivity::class.java)
+                    var intent = Intent(this, HexadecimalActivity::class.java)
                     startActivity(intent)
                 }
             }
