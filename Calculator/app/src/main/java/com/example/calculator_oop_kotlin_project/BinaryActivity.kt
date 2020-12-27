@@ -9,13 +9,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class BinaryActivity : AppCompatActivity() {
     var operation: Char = ' '
-
+    var mathClass = MathOperations()
     lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_binary)
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         setOnClickListeners()
     }
 
@@ -23,10 +23,6 @@ class BinaryActivity : AppCompatActivity() {
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
-        one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
-        sin_btn.setOnClickListener { calculate('S', OperatorSin()) }
-        cos_btn.setOnClickListener { calculate('C', OperatorCos()) }
         divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
@@ -38,7 +34,6 @@ class BinaryActivity : AppCompatActivity() {
 
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
-        dot_btn.setOnClickListener { appendText(".") }
     }
 
     private fun appendText(number: String)
@@ -49,7 +44,7 @@ class BinaryActivity : AppCompatActivity() {
 
     private fun clearAllText()
     {
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         secondNumber.text=""
         operation=' '
         procedure.text=""
@@ -70,49 +65,40 @@ class BinaryActivity : AppCompatActivity() {
 
         lastOperator = OperatorClass
 
-        var result:Double=0.0
-        var tempResult:Double=0.0
+        var result:Int=0
+        var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toDouble()
+                result = tempValue1.toInt()
             }
 
-            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toDouble()
+            (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                // convert to binary
-                //val intBits = java.lang.Double.doubleToIntBits(yourFloat)
-                //val binary = Integer.toBinaryString(intBits)
-
-                //var tempBinaryValue1 = Double.toBinaryString(tempValue1)
-                //var tempBinaryValue2 = Integer.toBinaryString(tempValue2.toInt())
-
                 // convert to decimal
-                //tempValue1 = Integer.parseDouble(tempBinaryValue1, 2).toString()
-                //tempValue2 = Integer.parseInt(tempBinaryValue2, 2).toString()
+                var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())
+                var tempDecimalValue2 = mathClass.convertBinaryToDecimal(tempValue2.toFloat())
 
-                tempResult = OperatorClass.checkTwoNumbers(
-                    tempValue1.toDouble(),
-                    tempValue2.toDouble()
-                )
-                result = Integer.toBinaryString(tempResult.toInt()).toDouble()
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+
+                result = mathClass.convertDecimalToBinary(tempResult.toFloat())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
-                firstNumber.append(".0")
                 secondNumber.text = ""
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
+                // convert to decimal
+                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toInt()
             }
         }
 

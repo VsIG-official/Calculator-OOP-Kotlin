@@ -19,7 +19,6 @@ class HexadecimalActivity : AppCompatActivity() {
         setOnClickListeners()
     }
 
-
     private fun setOnClickListeners()
     {
         options_btn.setOnClickListener { options() }
@@ -53,7 +52,6 @@ class HexadecimalActivity : AppCompatActivity() {
         two_btn.setOnClickListener { appendText("2") }
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
-        dot_btn.setOnClickListener { appendText(".") }
     }
 
     private fun appendText(number: String)
@@ -64,7 +62,7 @@ class HexadecimalActivity : AppCompatActivity() {
 
     private fun clearAllText()
     {
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         secondNumber.text=""
         operation=' '
         procedure.text=""
@@ -85,33 +83,32 @@ class HexadecimalActivity : AppCompatActivity() {
 
         lastOperator = OperatorClass
 
-        var result:Double=0.0
+        var result:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toDouble()
+                result = tempValue1.toInt()
             }
 
             (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toDouble()
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
+                //result = OperatorClass.checkTwoNumbers(tempValue1.toInt(), tempValue2.toInt())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
-                firstNumber.append(".0")
                 secondNumber.text = ""
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
+                //result = OperatorClass.checkOneNumber(tempValue1.toInt())
             }
         }
 
