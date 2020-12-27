@@ -9,13 +9,12 @@ import kotlinx.android.synthetic.main.activity_hexadecimal.*
 
 class HexadecimalActivity : AppCompatActivity() {
     var operation: Char = ' '
-    var mathClass = MathOperations()
     lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hexadecimal)
-        firstNumber.text="0.0"
+        firstNumber.text="0"
         setOnClickListeners()
     }
 
@@ -25,8 +24,6 @@ class HexadecimalActivity : AppCompatActivity() {
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
         one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
-        sin_btn.setOnClickListener { calculate('S', OperatorSin()) }
-        cos_btn.setOnClickListener { calculate('C', OperatorCos()) }
         divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
@@ -83,7 +80,7 @@ class HexadecimalActivity : AppCompatActivity() {
 
         lastOperator = OperatorClass
 
-        var result:Int=0
+        var result:String="0"
         var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
@@ -91,22 +88,22 @@ class HexadecimalActivity : AppCompatActivity() {
 
         when {
             !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toInt()
+                result = tempValue1
             }
 
             (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toInt()
+                result = tempValue2
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                // convert to decimal
+                // convert to decimal WORK
                 var tempDecimalValue1 = Integer.parseInt(tempValue1,16)
                 var tempDecimalValue2 = Integer.parseInt(tempValue2,16)
 
                 tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
 
-                result = Integer.toHexString(tempResult).toInt()
+                result = Integer.toHexString(tempResult)
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -116,7 +113,7 @@ class HexadecimalActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() ->{
                 // convert to decimal
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toInt()
+                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toString()
             }
         }
 
