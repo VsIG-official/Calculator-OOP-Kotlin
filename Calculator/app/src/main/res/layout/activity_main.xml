@@ -108,22 +108,22 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/clear_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="C"
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/plus_minus_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="±"
                 android:textSize="40sp"/>
             <TextView
                 android:id="@+id/one_divide_x_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="1/X"
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/divide_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="/"
                 android:textSize="40sp"/>
         </LinearLayout>
@@ -135,22 +135,22 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/mod_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="%"
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/degree_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="^"
                 android:textSize="40sp"/>
             <TextView
                 android:id="@+id/sin_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="sin"
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/cos_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="cos"
                 android:textSize="30sp"/>
         </LinearLayout>
@@ -177,7 +177,7 @@
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/multiply_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="*"
                 android:textSize="40sp"/>
         </LinearLayout>
@@ -204,7 +204,7 @@
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/minus_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="-"
                 android:textSize="60sp"/>
         </LinearLayout>
@@ -231,7 +231,7 @@
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/plus_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="+"
                 android:textSize="40sp"/>
         </LinearLayout>
@@ -260,7 +260,7 @@
                 android:scaleType="center"/>
             <TextView
                 android:id="@+id/equals_btn"
-                style="@style/ActionButtonStyle"
+                style="@style/OperationButtonStyle"
                 android:text="="
                 android:textSize="50sp"/>
         </LinearLayout>
