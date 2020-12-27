@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_hexadecimal.*
 
 class HexadecimalActivity : AppCompatActivity() {
     var operation: Char = ' '
-
+    var mathClass = MathOperations()
     lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +84,7 @@ class HexadecimalActivity : AppCompatActivity() {
         lastOperator = OperatorClass
 
         var result:Int=0
+        var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
@@ -93,13 +94,19 @@ class HexadecimalActivity : AppCompatActivity() {
                 result = tempValue1.toInt()
             }
 
-            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
+            (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
                 result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                //result = OperatorClass.checkTwoNumbers(tempValue1.toInt(), tempValue2.toInt())
+                // convert to decimal
+                var tempDecimalValue1 = Integer.parseInt(tempValue1,16)
+                var tempDecimalValue2 = Integer.parseInt(tempValue2,16)
+
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+
+                result = Integer.toHexString(tempResult).toInt()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -108,7 +115,8 @@ class HexadecimalActivity : AppCompatActivity() {
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                //result = OperatorClass.checkOneNumber(tempValue1.toInt())
+                // convert to decimal
+                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toInt()
             }
         }
 
