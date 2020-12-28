@@ -117,18 +117,16 @@ class BinaryActivity : AppCompatActivity() {
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
             dialogInterface.dismiss()
+
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,MainActivity::class.java))
                 }
                 "Binary" -> {
-                    var intent = Intent(this, BinaryActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,BinaryActivity::class.java))
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this, HexadecimalActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,HexadecimalActivity::class.java))
                 }
             }
         }

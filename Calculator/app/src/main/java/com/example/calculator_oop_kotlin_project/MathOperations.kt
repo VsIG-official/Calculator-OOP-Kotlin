@@ -3,7 +3,6 @@ package com.example.calculator_oop_kotlin_project
 import kotlin.math.pow
 
 class MathOperations {
-
     fun add(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber + secondNumber
@@ -56,30 +55,29 @@ class MathOperations {
 
     fun convertBinaryToDecimal(num: Float): Int {
         var num = num
-        var decimalNumber = 0
+        var decNum = 0
         var i = 0
-        var remainder: Float
+        var residual: Float
         while (num != 0f) {
-            remainder = num % 10
+            residual = num % 10
             num /= 10
-            decimalNumber += (remainder * Math.pow(2.0, i.toDouble())).toInt()
+            decNum += (residual * Math.pow(2.0, i.toDouble())).toInt()
             ++i
         }
-        return decimalNumber
+        return decNum
     }
 
     fun convertDecimalToBinary(n: Float): Int {
         var n = n
-        var binaryNumber: Int = 0
-        var remainder: Int
+        var binNum: Int = 0
+        var residual: Int
         var i = 1
-        var step = 1
         while (n != 0f) {
-            remainder = (n % 2).toInt()
+            residual = (n % 2).toInt()
             n /= 2
-            binaryNumber += (remainder * i)
+            binNum += (residual * i)
             i *= 10
         }
-        return binaryNumber
+        return binNum
     }
 }
