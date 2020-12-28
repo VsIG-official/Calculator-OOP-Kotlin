@@ -86,6 +86,8 @@ class MainActivity : AppCompatActivity()
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
+        result = tempValue1.toDouble()
+
         when {
             (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ||
                     firstNumber.text=="Infinity" || firstNumber.text=="-Infinity")
@@ -99,11 +101,13 @@ class MainActivity : AppCompatActivity()
             }
 
             !firstNumber.text.isNullOrEmpty() -> {
-                if (!oneNumberOperation && (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) ) {
-                    result = tempValue1.toDouble()
-                }
-                else if (oneNumberOperation){
-                    result = OperatorClass.checkOneNumber(tempValue1.toDouble())
+                when {
+                    !oneNumberOperation && (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) -> {
+                        result = tempValue1.toDouble()
+                    }
+                    oneNumberOperation -> {
+                        result = OperatorClass.checkOneNumber(tempValue1.toDouble())
+                    }
                 }
             }
 
