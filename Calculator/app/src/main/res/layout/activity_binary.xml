@@ -113,6 +113,11 @@
                 android:text="C"
                 android:textSize="60sp"/>
             <TextView
+                android:id="@+id/plus_minus_btn"
+                style="@style/OperationButtonStyle"
+                android:text="±"
+                android:textSize="60sp"/>
+            <TextView
                 android:id="@+id/degree_btn"
                 style="@style/OperationButtonStyle"
                 android:text="^"
@@ -137,10 +142,15 @@
                 android:text="%"
                 android:textSize="60sp"/>
             <TextView
-                android:id="@+id/multiply_btn"
+                android:id="@+id/sin_btn"
                 style="@style/OperationButtonStyle"
-                android:text="*"
-                android:textSize="60sp"/>
+                android:text="sin"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/cos_btn"
+                style="@style/OperationButtonStyle"
+                android:text="cos"
+                android:textSize="40sp"/>
 
         </LinearLayout>
 
@@ -159,6 +169,11 @@
                 android:id="@+id/plus_btn"
                 style="@style/OperationButtonStyle"
                 android:text="+"
+                android:textSize="60sp"/>
+            <TextView
+                android:id="@+id/multiply_btn"
+                style="@style/OperationButtonStyle"
+                android:text="*"
                 android:textSize="60sp"/>
             <TextView
                 android:id="@+id/equals_btn"

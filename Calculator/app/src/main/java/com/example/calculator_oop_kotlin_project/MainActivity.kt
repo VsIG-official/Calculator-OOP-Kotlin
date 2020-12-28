@@ -26,18 +26,18 @@ class MainActivity : AppCompatActivity()
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
-        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus()) }
-        one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal()) }
-        sin_btn.setOnClickListener { calculate('S', OperatorSin()) }
-        cos_btn.setOnClickListener { calculate('C', OperatorCos()) }
-        divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
-        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
-        minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
-        plus_btn.setOnClickListener { calculate('+', OperatorPlus()) }
-        equals_btn.setOnClickListener { calculate(operation, lastOperator) }
+        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus(), true) }
+        one_divide_x_btn.setOnClickListener { calculate('R', OperatorReciprocal(), true) }
+        sin_btn.setOnClickListener { calculate('S', OperatorSin(), true) }
+        cos_btn.setOnClickListener { calculate('C', OperatorCos(), true) }
+        divide_btn.setOnClickListener { calculate('/', OperatorDivide(), false) }
+        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply(), false) }
+        minus_btn.setOnClickListener { calculate('-', OperatorMinus(), false) }
+        plus_btn.setOnClickListener { calculate('+', OperatorPlus(), false) }
+        equals_btn.setOnClickListener { calculate(operation, lastOperator, false) }
         back_btn.setOnClickListener { clearLastCharacter() }
-        mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
-        degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
+        mod_btn.setOnClickListener { calculate('%', OperatorMod(), false) }
+        degree_btn.setOnClickListener { calculate('^', OperatorDegree(), false) }
 
         nine_btn.setOnClickListener { appendText("9") }
         eight_btn.setOnClickListener { appendText("8") }
@@ -75,39 +75,37 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun calculate(operationChar: Char, OperatorClass: Operator) {
+    private fun calculate(operationChar: Char, OperatorClass: Operator, oneNumberOperation: Boolean) {
         // current operation
         operation = operationChar
 
         lastOperator = OperatorClass
 
-        var result:Float=0.0f
-
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
-        when {
-            !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toFloat()
-            }
+        var result = tempValue1.toDouble()
 
-            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2.toFloat()
+        when {
+            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ||
+                    firstNumber.text=="Infinity" || firstNumber.text=="-Infinity")
+                    && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toDouble()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toFloat(), tempValue2.toFloat())
+                result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
+            }
+
+            !firstNumber.text.isNullOrEmpty() && oneNumberOperation ->{
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
                 firstNumber.append(".0")
                 secondNumber.text = ""
-            }
-
-            !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
             }
         }
 
@@ -126,18 +124,16 @@ class MainActivity : AppCompatActivity()
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
             dialogInterface.dismiss()
+
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,MainActivity::class.java))
                 }
                 "Binary" -> {
-                    var intent = Intent(this,BinaryActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,BinaryActivity::class.java))
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this,HexadecimalActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,HexadecimalActivity::class.java))
                 }
             }
         }

@@ -22,14 +22,15 @@ class HexadecimalActivity : AppCompatActivity() {
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
-        divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
-        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
-        minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
-        plus_btn.setOnClickListener { calculate('+', OperatorPlus()) }
-        equals_btn.setOnClickListener { calculate(operation, lastOperator) }
+        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus(), true) }
+        divide_btn.setOnClickListener { calculate('/', OperatorDivide(), false) }
+        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply(), false) }
+        minus_btn.setOnClickListener { calculate('-', OperatorMinus(), false) }
+        plus_btn.setOnClickListener { calculate('+', OperatorPlus(), false) }
+        equals_btn.setOnClickListener { calculate(operation, lastOperator, false) }
         back_btn.setOnClickListener { clearLastCharacter() }
-        mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
-        degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
+        mod_btn.setOnClickListener { calculate('%', OperatorMod(), false) }
+        degree_btn.setOnClickListener { calculate('^', OperatorDegree(), false) }
 
         f_btn.setOnClickListener { appendText("F") }
         e_btn.setOnClickListener { appendText("E") }
@@ -72,51 +73,50 @@ class HexadecimalActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculate(operationChar: Char, OperatorClass: Operator) {
+    private fun calculate(operationChar: Char, OperatorClass: Operator, oneNumberOperation: Boolean) {
         // current operation
         operation = operationChar
 
         lastOperator = OperatorClass
 
-        var result:String="0"
         var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
-        when {
-            !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1
-            }
+        var result = tempValue1
 
-            (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
+        when {
+            (firstNumber.text=="0" || firstNumber.text=="-0" ||
+                    firstNumber.text=="Infinity" || firstNumber.text=="-Infinity")
+                    && !secondNumber.text.isNullOrEmpty() -> {
                 result = tempValue2
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                // convert to decimal WORK
+                // convert to decimal
                 var tempDecimalValue1 = Integer.parseInt(tempValue1,16)
                 var tempDecimalValue2 = Integer.parseInt(tempValue2,16)
 
-                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toDouble(),
+                        tempDecimalValue2.toDouble()).toInt()
 
                 result = Integer.toHexString(tempResult)
+            }
+
+            !firstNumber.text.isNullOrEmpty() && oneNumberOperation -> {
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toInt().toString()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
                 secondNumber.text = ""
             }
-
-            !firstNumber.text.isNullOrEmpty() ->{
-                // convert to decimal
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toString()
-            }
         }
 
         // do this after calling calculate
-        firstNumber.text = result.toString()
+        firstNumber.text = result.toUpperCase()
         secondNumber.text = ""
         procedure.text=operation.toString()
     }
@@ -130,18 +130,16 @@ class HexadecimalActivity : AppCompatActivity() {
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
             dialogInterface.dismiss()
+
             when (tempString) {
                 "Decimal" -> {
-                    var intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,MainActivity::class.java))
                 }
                 "Binary" -> {
-                    var intent = Intent(this,BinaryActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,BinaryActivity::class.java))
                 }
                 "Hexadecimal" -> {
-                    var intent = Intent(this,HexadecimalActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,HexadecimalActivity::class.java))
                 }
             }
         }

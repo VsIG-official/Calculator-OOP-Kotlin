@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_dark"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,6 +107,11 @@
                 android:id="@+id/clear_btn"
                 style="@style/OperationButtonStyle"
                 android:text="C"
+                android:textSize="30sp"/>
+            <TextView
+                android:id="@+id/plus_minus_btn"
+                style="@style/OperationButtonStyle"
+                android:text="±"
                 android:textSize="30sp"/>
             <TextView
                 android:id="@+id/mod_btn"
@@ -272,7 +274,6 @@
                 android:textSize="30sp"
                 android:src="@drawable/baseline_backspace_white_18dp"
                 android:scaleType="center"/>
-
             <TextView
                 android:id="@+id/equals_btn"
                 style="@style/OperationButtonStyle"
