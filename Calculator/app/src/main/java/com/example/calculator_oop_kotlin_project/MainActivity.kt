@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity()
             }
 
             !firstNumber.text.isNullOrEmpty() -> {
-                if (!oneNumberOperation && (firstNumber.text=="0.0" || firstNumber.text=="-0.0" )) {
+                if (!oneNumberOperation && (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ) ) {
                     result = tempValue1.toDouble()
                 }
                 else if (oneNumberOperation){
@@ -111,6 +111,10 @@ class MainActivity : AppCompatActivity()
                 firstNumber.text = secondNumber.text
                 firstNumber.append(".0")
                 secondNumber.text = ""
+            }
+
+            !firstNumber.text.isNullOrEmpty() && secondNumber.text.isNullOrEmpty() ->{
+                result = tempValue1.toDouble()
             }
         }
 
