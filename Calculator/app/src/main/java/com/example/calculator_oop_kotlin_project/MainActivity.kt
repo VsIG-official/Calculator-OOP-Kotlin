@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity()
                 result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
             }
 
-            !firstNumber.text.isNullOrEmpty() ->{
+            !firstNumber.text.isNullOrEmpty()  ->{
                 result = OperatorClass.checkOneNumber(tempValue1.toDouble())
             }
 
