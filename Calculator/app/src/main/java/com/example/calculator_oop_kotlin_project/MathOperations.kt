@@ -4,52 +4,52 @@ import kotlin.math.pow
 
 class MathOperations {
 
-    fun add(firstNumber: Float, secondNumber: Float): Float
+    fun add(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber + secondNumber
     }
 
-    fun subtract(firstNumber: Float, secondNumber: Float): Float
+    fun subtract(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber - secondNumber
     }
 
-    fun divide(firstNumber: Float, secondNumber: Float): Float
+    fun divide(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber / secondNumber
     }
 
-    fun multiply(firstNumber: Float, secondNumber: Float): Float
+    fun multiply(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber * secondNumber
     }
 
-    fun mod(firstNumber: Float, secondNumber: Float): Float
+    fun mod(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber % secondNumber
     }
 
-    fun degree(firstNumber: Float, secondNumber: Float): Float
+    fun degree(firstNumber: Double, secondNumber: Double): Double
     {
         return firstNumber.pow(secondNumber)
     }
 
-    fun plusMinus(firstNumber: Float): Float
+    fun plusMinus(firstNumber: Double): Double
     {
         return firstNumber * -1
     }
 
-    fun reciprocal(firstNumber: Float): Float
+    fun reciprocal(firstNumber: Double): Double
     {
         return 1 / firstNumber
     }
 
-    fun sin(firstNumber: Float): Float
+    fun sin(firstNumber: Double): Double
     {
         return kotlin.math.sin(firstNumber)
     }
 
-    fun cos(firstNumber: Float): Float
+    fun cos(firstNumber: Double): Double
     {
         return kotlin.math.cos(firstNumber)
     }

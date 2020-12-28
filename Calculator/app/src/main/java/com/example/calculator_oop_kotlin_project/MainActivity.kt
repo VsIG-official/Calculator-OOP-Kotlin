@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity()
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
-                result = OperatorClass.checkTwoNumbers(tempValue1.toFloat(), tempValue2.toFloat())
+                result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble()).toFloat()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity()
             }
 
             !firstNumber.text.isNullOrEmpty() ->{
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat())
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toFloat()
             }
         }
 

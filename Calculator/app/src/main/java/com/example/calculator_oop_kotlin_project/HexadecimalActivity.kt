@@ -99,7 +99,7 @@ class HexadecimalActivity : AppCompatActivity() {
                 var tempDecimalValue1 = Integer.parseInt(tempValue1,16)
                 var tempDecimalValue2 = Integer.parseInt(tempValue2,16)
 
-                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toDouble(),tempDecimalValue2.toDouble()).toInt()
 
                 result = Integer.toHexString(tempResult)
             }
@@ -111,7 +111,7 @@ class HexadecimalActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() ->{
                 // convert to decimal
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toString()
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toString()
             }
         }
 

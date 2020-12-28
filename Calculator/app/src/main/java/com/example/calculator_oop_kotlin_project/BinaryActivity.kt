@@ -86,7 +86,7 @@ class BinaryActivity : AppCompatActivity() {
                 var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())
                 var tempDecimalValue2 = mathClass.convertBinaryToDecimal(tempValue2.toFloat())
 
-                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toFloat(),tempDecimalValue2.toFloat()).toInt()
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toDouble(),tempDecimalValue2.toDouble()).toInt()
 
                 result = mathClass.convertDecimalToBinary(tempResult.toFloat())
             }
@@ -98,7 +98,7 @@ class BinaryActivity : AppCompatActivity() {
 
             !firstNumber.text.isNullOrEmpty() ->{
                 // convert to decimal
-                result = OperatorClass.checkOneNumber(tempValue1.toFloat()).toInt()
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toInt()
             }
         }
 

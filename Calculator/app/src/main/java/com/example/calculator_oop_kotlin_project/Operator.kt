@@ -1,24 +1,24 @@
 package com.example.calculator_oop_kotlin_project
 
 open class Operator {
-    open fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float
+    open fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double
     {
         var mathClass = MathOperations()
 
-        var result: Float = 0.0f
+        var result: Double = 0.0
         return result
     }
-    open fun checkOneNumber(firstNumber: Float): Float
+    open fun checkOneNumber(firstNumber: Double): Double
     {
         var mathClass = MathOperations()
 
-        var result: Float = 0.0f
+        var result: Double = 0.0
         return result
     }
 }
 
 class OperatorPlus : Operator(){
-    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.add(firstNumber, secondNumber)
@@ -26,7 +26,7 @@ class OperatorPlus : Operator(){
 }
 
 class OperatorMinus : Operator(){
-    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.subtract(firstNumber, secondNumber)
@@ -34,7 +34,7 @@ class OperatorMinus : Operator(){
 }
 
 class OperatorMod : Operator(){
-    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.mod(firstNumber, secondNumber)
@@ -42,7 +42,7 @@ class OperatorMod : Operator(){
 }
 
 class OperatorDegree : Operator(){
-    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.degree(firstNumber, secondNumber)
@@ -50,7 +50,7 @@ class OperatorDegree : Operator(){
 }
 
 class OperatorMultiply : Operator(){
-    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.multiply(firstNumber, secondNumber)
@@ -58,7 +58,7 @@ class OperatorMultiply : Operator(){
 }
 
 class OperatorDivide : Operator(){
-    override fun checkTwoNumbers(firstNumber: Float, secondNumber: Float): Float {
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.divide(firstNumber, secondNumber)
@@ -66,7 +66,7 @@ class OperatorDivide : Operator(){
 }
 
 class OperatorSin : Operator(){
-    override fun checkOneNumber(firstNumber: Float): Float {
+    override fun checkOneNumber(firstNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.sin(firstNumber)
@@ -74,7 +74,7 @@ class OperatorSin : Operator(){
 }
 
 class OperatorCos : Operator(){
-    override fun checkOneNumber(firstNumber: Float): Float {
+    override fun checkOneNumber(firstNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.cos(firstNumber)
@@ -82,7 +82,7 @@ class OperatorCos : Operator(){
 }
 
 class OperatorReciprocal : Operator(){
-    override fun checkOneNumber(firstNumber: Float): Float {
+    override fun checkOneNumber(firstNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.reciprocal(firstNumber)
@@ -90,7 +90,7 @@ class OperatorReciprocal : Operator(){
 }
 
 class OperatorPlusMinus : Operator(){
-    override fun checkOneNumber(firstNumber: Float): Float {
+    override fun checkOneNumber(firstNumber: Double): Double {
         var mathClass = MathOperations()
 
         return mathClass.plusMinus(firstNumber)
