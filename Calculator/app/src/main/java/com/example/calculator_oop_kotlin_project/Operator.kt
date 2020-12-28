@@ -83,16 +83,28 @@ class OperatorCos : Operator(){
 
 class OperatorReciprocal : Operator(){
     override fun checkOneNumber(firstNumber: Double): Double {
+        var result: Double = 0.0
+
         var mathClass = MathOperations()
 
-        return mathClass.reciprocal(firstNumber)
+        var tempValue1 = firstNumber
+
+        result = mathClass.reciprocal(tempValue1)
+
+        return result
     }
 }
 
 class OperatorPlusMinus : Operator(){
     override fun checkOneNumber(firstNumber: Double): Double {
+        var result: Double = 0.0
+
         var mathClass = MathOperations()
 
-        return mathClass.plusMinus(firstNumber)
+        var tempValue1 = firstNumber
+
+        result = mathClass.plusMinus(tempValue1)
+
+        return result
     }
 }
