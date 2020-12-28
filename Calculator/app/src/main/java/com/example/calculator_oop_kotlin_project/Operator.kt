@@ -97,14 +97,12 @@ class OperatorReciprocal : Operator(){
 
 class OperatorPlusMinus : Operator(){
     override fun checkOneNumber(firstNumber: Double): Double {
-        var result: Double = 0.0
-
         var mathClass = MathOperations()
 
-        var tempValue1 = firstNumber
+        return mathClass.plusMinus(firstNumber)
+    }
 
-        result = mathClass.plusMinus(tempValue1)
-
-        return result
+    override fun checkTwoNumbers(firstNumber: Double, secondNumber: Double): Double{
+        return checkOneNumber(firstNumber)
     }
 }
