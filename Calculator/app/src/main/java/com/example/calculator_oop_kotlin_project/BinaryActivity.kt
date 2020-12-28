@@ -23,14 +23,17 @@ class BinaryActivity : AppCompatActivity() {
     {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
-        divide_btn.setOnClickListener { calculate('/', OperatorDivide()) }
-        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply()) }
-        minus_btn.setOnClickListener { calculate('-', OperatorMinus()) }
-        plus_btn.setOnClickListener { calculate('+', OperatorPlus()) }
-        equals_btn.setOnClickListener { calculate(operation, lastOperator) }
+        plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus(), true) }
+        sin_btn.setOnClickListener { calculate('S', OperatorSin(), true) }
+        cos_btn.setOnClickListener { calculate('C', OperatorCos(), true) }
+        divide_btn.setOnClickListener { calculate('/', OperatorDivide(), false) }
+        multiply_btn.setOnClickListener { calculate('*', OperatorMultiply(), false) }
+        minus_btn.setOnClickListener { calculate('-', OperatorMinus(), false) }
+        plus_btn.setOnClickListener { calculate('+', OperatorPlus(), false) }
+        equals_btn.setOnClickListener { calculate(operation, lastOperator, false) }
         back_btn.setOnClickListener { clearLastCharacter() }
-        mod_btn.setOnClickListener { calculate('%', OperatorMod()) }
-        degree_btn.setOnClickListener { calculate('^', OperatorDegree()) }
+        mod_btn.setOnClickListener { calculate('%', OperatorMod(), false) }
+        degree_btn.setOnClickListener { calculate('^', OperatorDegree(), false) }
 
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
@@ -59,24 +62,23 @@ class BinaryActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculate(operationChar: Char, OperatorClass: Operator) {
+    private fun calculate(operationChar: Char, OperatorClass: Operator, oneNumberOperation: Boolean) {
         // current operation
         operation = operationChar
 
         lastOperator = OperatorClass
 
-        var result:Int=0
         var tempResult:Int=0
 
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
-        when {
-            !firstNumber.text.isNullOrEmpty()  && secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue1.toInt()
-            }
+        var result = tempValue1.toInt()
 
-            (firstNumber.text=="0" || firstNumber.text=="-0" ) && !secondNumber.text.isNullOrEmpty() -> {
+        when {
+            (firstNumber.text == "0" || firstNumber.text == "-0" ||
+                    firstNumber.text == "Infinity" || firstNumber.text == "-Infinity" )
+                    && !secondNumber.text.isNullOrEmpty() -> {
                 result = tempValue2.toInt()
             }
 
@@ -91,14 +93,13 @@ class BinaryActivity : AppCompatActivity() {
                 result = mathClass.convertDecimalToBinary(tempResult.toFloat())
             }
 
+            !firstNumber.text.isNullOrEmpty() && oneNumberOperation ->{
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toInt()
+            }
+
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
                 firstNumber.text = secondNumber.text
                 secondNumber.text = ""
-            }
-
-            !firstNumber.text.isNullOrEmpty() ->{
-                // convert to decimal
-                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toInt()
             }
         }
 
