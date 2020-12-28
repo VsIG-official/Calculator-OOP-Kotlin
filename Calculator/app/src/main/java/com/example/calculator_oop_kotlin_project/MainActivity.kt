@@ -124,6 +124,7 @@ class MainActivity : AppCompatActivity()
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
             dialogInterface.dismiss()
+
             when (tempString) {
                 "Decimal" -> {
                     var intent = Intent(this,MainActivity::class.java)
