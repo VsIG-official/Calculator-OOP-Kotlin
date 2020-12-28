@@ -18,6 +18,7 @@ class HexadecimalActivity : AppCompatActivity() {
         setOnClickListeners()
     }
 
+    // set listener for every button
     private fun setOnClickListeners()
     {
         options_btn.setOnClickListener { options() }
@@ -50,12 +51,14 @@ class HexadecimalActivity : AppCompatActivity() {
         zero_btn.setOnClickListener { appendText("0") }
     }
 
+    // add text to second TextView and automatically scrolls to the end
     private fun appendText(number: String)
     {
         secondNumber.append(number);
         second_scroll.post { second_scroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT) }
     }
 
+    // clear all text
     private fun clearAllText()
     {
         firstNumber.text="0"
@@ -64,6 +67,7 @@ class HexadecimalActivity : AppCompatActivity() {
         procedure.text=""
     }
 
+    // clear last character
     private fun clearLastCharacter()
     {
         val tempString = secondNumber.text.toString()
@@ -73,6 +77,7 @@ class HexadecimalActivity : AppCompatActivity() {
         }
     }
 
+    // main function for calculating
     private fun calculate(operationChar: Char, OperatorClass: Operator, oneNumberOperation: Boolean) {
         // current operation
         operation = operationChar
@@ -121,6 +126,7 @@ class HexadecimalActivity : AppCompatActivity() {
         procedure.text=operation.toString()
     }
 
+    // options button
     private fun options()
     {
         var tempString = ""
