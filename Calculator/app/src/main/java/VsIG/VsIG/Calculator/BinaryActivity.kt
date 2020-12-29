@@ -88,7 +88,7 @@ class BinaryActivity : AppCompatActivity() {
                 result = tempValue2.toInt()
             }
 
-            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
+            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() && !oneNumberOperation ->
             {
                 // convert to decimal
                 var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())

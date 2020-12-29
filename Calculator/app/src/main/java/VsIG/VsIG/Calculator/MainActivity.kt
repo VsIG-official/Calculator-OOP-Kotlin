@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity()
                 result = tempValue2.toDouble()
             }
 
-            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
+            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() && !oneNumberOperation ->
             {
                 result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
             }

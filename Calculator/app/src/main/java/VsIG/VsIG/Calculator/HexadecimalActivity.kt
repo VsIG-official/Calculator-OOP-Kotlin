@@ -83,6 +83,11 @@ class HexadecimalActivity : AppCompatActivity() {
         // current operation
         operation = operationChar
 
+        if (operation==' ')
+        {
+            operation='+'
+        }
+
         lastOperator = OperatorClass
 
         var tempResult:Int=0
@@ -99,7 +104,7 @@ class HexadecimalActivity : AppCompatActivity() {
                 result = tempValue2
             }
 
-            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
+            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() && !oneNumberOperation ->
             {
                 // convert to decimal
                 var tempDecimalValue1 = Integer.parseInt(tempValue1,16)
