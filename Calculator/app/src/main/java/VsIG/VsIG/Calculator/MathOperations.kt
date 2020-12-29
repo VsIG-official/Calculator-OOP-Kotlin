@@ -1,4 +1,4 @@
-package com.example.calculator_oop_kotlin_project
+package VsIG.VsIG.Calculator
 
 import kotlin.math.pow
 

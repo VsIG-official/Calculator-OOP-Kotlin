@@ -8,10 +8,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".HexadecimalActivity"></activity>
-        <activity android:name=".BinaryActivity" />
+        <activity android:name="VsIG.VsIG.Calculator.HexadecimalActivity"></activity>
+        <activity android:name="VsIG.VsIG.Calculator.BinaryActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="VsIG.VsIG.Calculator.MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

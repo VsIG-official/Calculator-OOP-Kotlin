@@ -1,19 +1,21 @@
-package com.example.calculator_oop_kotlin_project
+package VsIG.VsIG.Calculator
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.HorizontalScrollView
 import androidx.appcompat.app.AlertDialog
-import kotlinx.android.synthetic.main.activity_hexadecimal.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.calculator_oop_kotlin_project.R
+import kotlinx.android.synthetic.main.activity_main.*
 
-class HexadecimalActivity : AppCompatActivity() {
+class BinaryActivity : AppCompatActivity() {
     var operation: Char = ' '
+    var mathClass = MathOperations()
     lateinit var lastOperator: Operator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hexadecimal)
+        setContentView(R.layout.activity_binary)
         firstNumber.text="0"
         setOnClickListeners()
     }
@@ -24,6 +26,8 @@ class HexadecimalActivity : AppCompatActivity() {
         options_btn.setOnClickListener { options() }
         clear_btn.setOnClickListener { clearAllText() }
         plus_minus_btn.setOnClickListener { calculate('±', OperatorPlusMinus(), true) }
+        sin_btn.setOnClickListener { calculate('S', OperatorSin(), true) }
+        cos_btn.setOnClickListener { calculate('C', OperatorCos(), true) }
         divide_btn.setOnClickListener { calculate('/', OperatorDivide(), false) }
         multiply_btn.setOnClickListener { calculate('*', OperatorMultiply(), false) }
         minus_btn.setOnClickListener { calculate('-', OperatorMinus(), false) }
@@ -33,20 +37,6 @@ class HexadecimalActivity : AppCompatActivity() {
         mod_btn.setOnClickListener { calculate('%', OperatorMod(), false) }
         degree_btn.setOnClickListener { calculate('^', OperatorDegree(), false) }
 
-        f_btn.setOnClickListener { appendText("F") }
-        e_btn.setOnClickListener { appendText("E") }
-        d_btn.setOnClickListener { appendText("D") }
-        c_btn.setOnClickListener { appendText("C") }
-        b_btn.setOnClickListener { appendText("B") }
-        a_btn.setOnClickListener { appendText("A") }
-        nine_btn.setOnClickListener { appendText("9") }
-        eight_btn.setOnClickListener { appendText("8") }
-        seven_btn.setOnClickListener { appendText("7") }
-        six_btn.setOnClickListener { appendText("6") }
-        five_btn.setOnClickListener { appendText("5") }
-        four_btn.setOnClickListener { appendText("4") }
-        three_btn.setOnClickListener { appendText("3") }
-        two_btn.setOnClickListener { appendText("2") }
         one_btn.setOnClickListener { appendText("1") }
         zero_btn.setOnClickListener { appendText("0") }
     }
@@ -89,29 +79,28 @@ class HexadecimalActivity : AppCompatActivity() {
         var tempValue1 = firstNumber.text.toString()
         var tempValue2 = secondNumber.text.toString()
 
-        var result = tempValue1
+        var result = tempValue1.toInt()
 
         when {
-            (firstNumber.text=="0" || firstNumber.text=="-0" ||
-                    firstNumber.text=="Infinity" || firstNumber.text=="-Infinity")
+            (firstNumber.text == "0" || firstNumber.text == "-0" ||
+                    firstNumber.text == "Infinity" || firstNumber.text == "-Infinity" )
                     && !secondNumber.text.isNullOrEmpty() -> {
-                result = tempValue2
+                result = tempValue2.toInt()
             }
 
             !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() ->
             {
                 // convert to decimal
-                var tempDecimalValue1 = Integer.parseInt(tempValue1,16)
-                var tempDecimalValue2 = Integer.parseInt(tempValue2,16)
+                var tempDecimalValue1 = mathClass.convertBinaryToDecimal(tempValue1.toFloat())
+                var tempDecimalValue2 = mathClass.convertBinaryToDecimal(tempValue2.toFloat())
 
-                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toDouble(),
-                        tempDecimalValue2.toDouble()).toInt()
+                tempResult = OperatorClass.checkTwoNumbers(tempDecimalValue1.toDouble(),tempDecimalValue2.toDouble()).toInt()
 
-                result = Integer.toHexString(tempResult)
+                result = mathClass.convertDecimalToBinary(tempResult.toFloat())
             }
 
-            !firstNumber.text.isNullOrEmpty() && oneNumberOperation -> {
-                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toInt().toString()
+            !firstNumber.text.isNullOrEmpty() && oneNumberOperation ->{
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble()).toInt()
             }
 
             firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
@@ -121,7 +110,7 @@ class HexadecimalActivity : AppCompatActivity() {
         }
 
         // do this after calling calculate
-        firstNumber.text = result.toUpperCase()
+        firstNumber.text = result.toString()
         secondNumber.text = ""
         procedure.text=operation.toString()
     }
@@ -131,7 +120,7 @@ class HexadecimalActivity : AppCompatActivity() {
     {
         var tempString = ""
         val listItems = arrayOf("Decimal", "Binary", "Hexadecimal")
-        val mBuilder = AlertDialog.Builder(this@HexadecimalActivity)
+        val mBuilder = AlertDialog.Builder(this@BinaryActivity)
         mBuilder.setTitle("Type of Calculator")
         mBuilder.setSingleChoiceItems(listItems, -1) { dialogInterface, i ->
             tempString = listItems[i]
@@ -139,13 +128,13 @@ class HexadecimalActivity : AppCompatActivity() {
 
             when (tempString) {
                 "Decimal" -> {
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
                 "Binary" -> {
-                    startActivity(Intent(this,BinaryActivity::class.java))
+                    startActivity(Intent(this, BinaryActivity::class.java))
                 }
                 "Hexadecimal" -> {
-                    startActivity(Intent(this,HexadecimalActivity::class.java))
+                    startActivity(Intent(this, HexadecimalActivity::class.java))
                 }
             }
         }
