@@ -1,4 +1,4 @@
-# Project Title
+# Calculator
 
 <p align="center">
   <img src="https://github.com/VsIG-official/Calculator-OOP-Kotlin/blob/master/Calculator%20OOP.png" data-canonical-src="https://github.com/VsIG-official/Calculator-OOP-Kotlin/blob/master/Calculator%20OOP.png" width="300" height="600" />
@@ -17,6 +17,9 @@ My small Calculator with OOP
 
 ## Badges
 
+> [![Language](https://img.shields.io/badge/Language-Kotlin-orange?style=flat-square)](https://en.wikipedia.org/wiki/Kotlin_(programming_language))
+> [![Theme](https://img.shields.io/badge/Theme-OOP-blue?style=flat-square)](https://en.wikipedia.org/wiki/Object-oriented_programming)
+> [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 
 ---
