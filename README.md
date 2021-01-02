@@ -27,7 +27,28 @@ My small Calculator with OOP
 ## Example
 
 ```kotlin
+when {
+            (firstNumber.text=="0.0" || firstNumber.text=="-0.0" ||
+                    firstNumber.text=="Infinity" || firstNumber.text=="-Infinity")
+                    && !secondNumber.text.isNullOrEmpty() -> {
+                result = tempValue2.toDouble()
+            }
 
+            !firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() && !oneNumberOperation ->
+            {
+                result = OperatorClass.checkTwoNumbers(tempValue1.toDouble(), tempValue2.toDouble())
+            }
+
+            !firstNumber.text.isNullOrEmpty() && oneNumberOperation ->{
+                result = OperatorClass.checkOneNumber(tempValue1.toDouble())
+            }
+
+            firstNumber.text.isNullOrEmpty() && !secondNumber.text.isNullOrEmpty() -> {
+                firstNumber.text = secondNumber.text
+                firstNumber.append(".0")
+                secondNumber.text = ""
+            }
+        }
 ```
 
 ---
