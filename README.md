@@ -13,7 +13,7 @@
 
 ### Description
 
-My small Calculator with OOP
+My small Calculator with OOP principles
 
 ## Badges
 
