@@ -13,7 +13,7 @@
 
 ### Description
 
-My small Calculator with OOP principles
+My small Calculator with OOP principles made in Android Studio
 
 ## Badges
 
